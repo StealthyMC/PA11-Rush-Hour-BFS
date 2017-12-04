@@ -12,12 +12,12 @@ on the game board. This will then be stored in a linked list data structure.
 @date Saturday, December 2, 2017
 */
 
-// Program Description/Support ///////////////////////////////////////////////// 
+// Program Description/Support /////////////////////////////////////////////////
 /**
 @mainpage This program requires a list class using a linked list
 format with nodes called vehicles. It uses a solveIt function
  and a main loop. When compiling this program only include this file.
-The fuctions used are solveIt(), and a class called List. 
+The fuctions used are solveIt(), and a class called List.
 */
 
 /*
@@ -31,8 +31,8 @@ included in this file. All have passed the test cases and are working properly.
 @param
  *
  * Programmer       : Student, Jared Knutson, Ian Grant, Andrew McIntrye
- * Project Number   : 11 
- * Date Due         : 12/06/2017 
+ * Project Number   : 11
+ * Date Due         : 12/06/2017
  */
 #include <iostream>
 #include <cstdlib>
@@ -41,7 +41,7 @@ included in this file. All have passed the test cases and are working properly.
 #include <queue>
 #include <string>
 
-using namespace std; 
+using namespace std;
 
 const int MAXBOARDSIZE = 100;
 
@@ -60,7 +60,7 @@ class List {/*{{{*/
     }
 
     /**
-    @param      const List& other:     Other list to copy. 
+    @param      const List& other:     Other list to copy.
     @pre        No List Object
     @post       List object is instantiated.
     @exception  N/A
@@ -70,7 +70,7 @@ class List {/*{{{*/
     List( const List& other ) {
         // Grab each node from other
         Vehicle *next_ptr;
-        Vehicle *other_ptr; 
+        Vehicle *other_ptr;
 
         // Copy head
         other_ptr = other.head;
@@ -78,13 +78,13 @@ class List {/*{{{*/
         cursor = head;
 
         // Copy rest of list until end of other list
-        while( other_ptr->next != NULL ) 
+        while( other_ptr->next != NULL )
         {
             next_ptr = new Vehicle( other_ptr->m_size, other_ptr->m_orient, other_ptr->m_row, other_ptr->m_col, next_ptr );
             cursor = next_ptr;
             other_ptr = other_ptr->next;
         }
-    } 
+    }
 
     /**
     @param      N/A
@@ -104,15 +104,15 @@ class List {/*{{{*/
     @post       List object is copied and returned.
     @exception  N/A
     @note       creates a copy of the object through assignment overload operator.
-    @return     returns a list object. 
+    @return     returns a list object.
     **/
     List& operator=( const List& other ) {
         // Grab each node from other
         Vehicle *next_ptr;
-        Vehicle *other_ptr; 
+        Vehicle *other_ptr;
 
         other_ptr = other.head;
-        this->head = new Vehicle( other_ptr->m_size, other_ptr->m_orient, other_ptr->m_row, other_ptr->m_col, NULL ); 
+        this->head = new Vehicle( other_ptr->m_size, other_ptr->m_orient, other_ptr->m_row, other_ptr->m_col, NULL );
         cursor = head;
 
         while( other_ptr->next != NULL )
@@ -122,7 +122,7 @@ class List {/*{{{*/
             other_ptr = other_ptr->next;
         }
         return *this;
-    } 
+    }
 
     /**
     @param      const int i
@@ -144,7 +144,7 @@ class List {/*{{{*/
                 const char orient
                 const int row
                 const int col
-    @pre        requires the parameters listed above in order to insert data into a new 
+    @pre        requires the parameters listed above in order to insert data into a new
                 dynamically allocated list.
     @post       After this method is called a new node will be inserted into the list.
     @exception  This method will throw a logic error if the list is full.
@@ -156,7 +156,7 @@ class List {/*{{{*/
         if ( isFull() )
             throw logic_error ( "insert() full list" );
       // If the list is not full
-        else if ( !isEmpty() ) 
+        else if ( !isEmpty() )
         {
             Vehicle* new_ptr;
             new_ptr = new Vehicle(size, orient, row, col, cursor->next);
@@ -164,14 +164,14 @@ class List {/*{{{*/
             cursor = new_ptr;
             gotoEnd();
             cursor->next = NULL;
-            cursor = new_ptr; 
+            cursor = new_ptr;
 
-        // If the list is empty 
-        } else 
+        // If the list is empty
+        } else
         {
             cursor = head = new Vehicle( size, orient, row, col, NULL );
         }
-    } 
+    }
 
     /**
     @param      N/A
@@ -186,24 +186,24 @@ class List {/*{{{*/
 
 
         // if list is empty
-        if ( isEmpty() ) 
+        if ( isEmpty() )
         {
             throw logic_error( "remove() empty list" );
         // if head is only element left in list
-        } else if ( head->next == NULL ) 
+        } else if ( head->next == NULL )
         {
           head = NULL;
           cursor = head;
 
         // if cursor is at beginning of list
-        } else if ( head == cursor ) 
+        } else if ( head == cursor )
         {
           del_ptr = head;
           cursor = head->next;
           head = cursor;
 
         // if cursor is at the end of the list.
-        } else if ( cursor->next == NULL ) 
+        } else if ( cursor->next == NULL )
         {
             del_ptr = cursor;
             gotoPrior();
@@ -212,7 +212,7 @@ class List {/*{{{*/
             delete del_ptr;
 
         // if cursor is in the middle of the list
-        } else 
+        } else
         {
             del_ptr = cursor;
             gotoPrior();
@@ -229,14 +229,14 @@ class List {/*{{{*/
     @exception  N/A
     @note       This method checks if the list is empty by checking if the head pointer is pointing to an address in memory
     @return     This method returns a bool true if the list is empty and false
-                if the list is non empty 
+                if the list is non empty
     **/
     bool isEmpty() const {
         if ( head == NULL )
             return 1;
         else
             return 0;
-    } 
+    }
 
     /**
     @param      N/A
@@ -248,42 +248,42 @@ class List {/*{{{*/
     **/
     bool isFull() const {
         return false;
-    } 
-    
+    }
+
     /**
-    @param      N/A 
+    @param      N/A
     @pre        Before this method is called the cursor will be in a random location
     @post       After this method is called the cursor will be pointing to the head node
     @exception  This method will throw a logic error if the list is empty
     @note       This method will set the cursor to the head node.
     @return     N/A
     **/
-    void gotoBeginning() throw ( logic_error ) { 
+    void gotoBeginning() throw ( logic_error ) {
         if ( isEmpty() ) {
-            throw logic_error( "gotoBeginning() empty list" ); 
+            throw logic_error( "gotoBeginning() empty list" );
         }
         cursor = head;
     }
-        
+
     /**
-    @param      N/A 
+    @param      N/A
     @pre        Before this method is called the cusor will be in a random location
     @post       After this method is called the cursor will be at the end of the list
     @exception  This method will throw a logic error if the list is empty
-    @note       This method sets the cursor to the end of the list 
+    @note       This method sets the cursor to the end of the list
     @return     N/A
     **/
     void gotoEnd() throw ( logic_error ) {
         if ( isEmpty() )
             throw logic_error( "gotoEnd() empty list" );
-        else 
+        else
         {
-            while( cursor->next != NULL ) 
+            while( cursor->next != NULL )
             {
                 cursor = cursor->next;
             }
         }
-    } 
+    }
 
     /**
     @param      N/A
@@ -299,20 +299,20 @@ class List {/*{{{*/
             throw logic_error ( "gotoNext() empty list" );
             return 0;
         }
-        else if ( cursor->next != NULL ) 
+        else if ( cursor->next != NULL )
         {
             cursor = cursor->next;
             return 1;
         }
         else
             return 0;
-    } 
+    }
 
     /**
     @param      N/A
     @pre        Before this method is called the cursor will be in a random location
     @post       After this method is called the cursor will be at the previous node
-    @exception  This method throws a logic error is the list is empty 
+    @exception  This method throws a logic error is the list is empty
     @note       This method will move the cursor to the previous node
     @return     This method returns a bool corresponding to if the move was successful
     **/
@@ -323,7 +323,7 @@ class List {/*{{{*/
             return 0;
         }
 
-        else if ( cursor != head ) 
+        else if ( cursor != head )
         {
             Vehicle* next_ptr;
             next_ptr = head;
@@ -338,7 +338,7 @@ class List {/*{{{*/
 
         } else
             return 0;
-    } 
+    }
 
     /**
     @param      N/A
@@ -348,14 +348,14 @@ class List {/*{{{*/
     @note       This method clears the list so that it is empty upon completion
     @return     N/A
     **/
-    void clear() { 
+    void clear() {
         cursor = head;
-        while( cursor != NULL ) 
+        while( cursor != NULL )
         {
             cursor = cursor->next;
             delete( head );
             head = cursor;
-        } 
+        }
         head = NULL;
         cursor = head;
     }
@@ -650,8 +650,8 @@ class List {/*{{{*/
    private:
     class Vehicle {
         public:
-            Vehicle( const int size, const char orient, const int row, const int col, Vehicle* nextPtr ) 
-            { 
+            Vehicle( const int size, const char orient, const int row, const int col, Vehicle* nextPtr )
+            {
                 m_size = size;
                 m_orient = orient;
                 m_row = row;
@@ -729,10 +729,7 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
                 cout << ret << endl;
                 c++;
             }
-        }
-        ret+='N';
-        if (moveNum<10)
-        {
+        } ret+='N'; if (moveNum<10) {
             ret+=itoa(moveNum,ret,10);
             cout << ret << endl;
             ret+='M';
@@ -769,18 +766,18 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
         //int end = input.find('M');
         //int result=0;
         //string retS=input.substr(pos,end);
-        c++; 
+        c++;
         cout << c<<endl;
         char a=input[c];
         cout << a<<endl;
-        
+
         int r1=int(a)-48;
         c++;
         if (input[c]!='M')
         {
             char b = input[c];
             cout << b << endl;
-            int r2=int(b)-48; 
+            int r2=int(b)-48;
             r1=r1*10;
             ret=r1+r2;
             return ret;
@@ -827,7 +824,7 @@ int main ()
         int board[MAXBOARDSIZE][MAXBOARDSIZE] = {0};
 
         // Get the number of cars
-        cin >> numCars; 
+        cin >> numCars;
         if(numCars == 0)
             break;
 
@@ -850,11 +847,11 @@ int main ()
         else
             cout << "Scenario " << count << " can not be solved in the moves allowed" << endl;
         delete carList;
-        count++; 
+        count++;
     }
     */
 }
- 
+/*
 void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap) {
     if(carList->isSolved()) {
         if(moveNum <= cap) {
@@ -862,7 +859,7 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
             solved = carList->isSolved();
             return;
         }
-    } else if(moveNum >= cap) { 
+    } else if(moveNum >= cap) {
         return;
     }
 
@@ -883,4 +880,35 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
             carList->moveForward(board);
         }
     }
+}
+*/
+
+
+void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&newBoard)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap)
+{
+    for (int i = numVehicles; i > 0; i--)
+    {
+      for (int j = 0; j < 2; j++)
+      {
+        string board_str = carList->a2d2string(board);
+        (j == 0) ? carList->moveForward() : carList->moveBackward();
+        if (carList->isSolved() == true)
+        {
+          if (moveNum <= cap)
+          {
+            cap = moveNum;
+            solved = true;
+            return;
+          }
+          else
+            return;
+        }
+        else
+        {
+          if (carList->insertBoard(board_str) == true)
+            carList->GoodBoards.push(board_str);
+        }
+      }
+    }
+    solveIt(carList,moveNum,numVehicles,solved,GoodBoards.pop(),cap);
 }
