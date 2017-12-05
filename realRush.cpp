@@ -255,6 +255,7 @@ class List {/*{{{*/
 
     bool insertBoard(string board)
     {
+
         bool ret = true;
         if(used[board])
             ret = false;
@@ -683,7 +684,7 @@ int main ()
     int count = 1;
     while(true) {
         bool solved = false;
-        int numCars = -1, size, row, col, cap = 10, moves = 0;
+        int numCars = -1, size, row, col, cap = 90, moves = 0;
         char orient;
         int board[MAXBOARDSIZE][MAXBOARDSIZE] = {0};
 
@@ -734,7 +735,9 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
         else
         {
           if (carList->insertBoard(carList->a2d2string(board,moveNum)) == true)
+          {
             carList->GoodBoards.push(carList->a2d2string(board,moveNum));
+          }
         }
       }
     }
