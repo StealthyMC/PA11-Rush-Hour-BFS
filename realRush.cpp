@@ -595,7 +595,7 @@ class List {/*{{{*/
      * @exception N/A
      * @note    the chars after N designate the numofmoves
      */
-    string a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int moveNum)
+    string a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
     {
         string s1="";
         for(int j = 0; j < MAXBOARDSIZE; j++)
@@ -705,7 +705,7 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
         for (int j = 0; j < 2; j++)
         {
             (j == 0) ? carList->moveForward(board) : carList->moveBackward(board);
-            string s = carList->a2d2string(board,moveNum+1);
+            string s = carList->a2d2string(board);
             if (carList->isSolved() == true)
             {
                 if (moveNum <= cap)
