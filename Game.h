@@ -1,33 +1,9 @@
-/** @file rushhour.cpp
-@author Andrew McIntyre
-@version Revision 1.0
-@brief This program will solve a traffic jam. The result will be the
-solution with the smallest number of moves.
-@details The program uses two classes, as well as a recursive solution in order
-to solve the Rush Hour game. The second class is nested inside the other, which
-is the Vehicle class. The primary class, Board, acts as a management system
-to handle all of the cars on the grid and moves them around accordingly. The
-cars are stored in a Linked List.
-@date Tuesday, October 03, 2017
-*/
-
 /**
-@mainpage
-This short program contains a recursive solution to solving a game of Rush Hour
-in the least possible amount of moves.
-
-The Board class manages all of the Vehicle objects within it, which does so by
+@details The Board class manages all of the Vehicle objects within it, which does so by
 modifying an array and moving the car around by changing their row and column
 positions. The Vehicles inside of the Board class act as a Linked List, and
 whenever a function such as <em>moveForward()</em> is called, it will perform the
 method on the car that the cursor pointer is pointing to.
-
-The <em>SolveIt()</em> function is a direct recursive function. It first checks
-if the program is solved, and if so, updates the cap if the solution was found
-to be completed in less steps than the cap. If it's not solved, the program
-checks if the cap has been reached, and if so, returns. This causes the recursion
-to move back a step. Otherwise, start iterating through the cars by moving them
-back and forth until the primary car is able to move to the finish position.
 */
 
 /*
