@@ -250,6 +250,20 @@ class List {/*{{{*/
         return false;
     }
 
+<<<<<<< HEAD
+=======
+
+
+    bool insertBoard(string board)
+    {
+        bool ret = true;
+        if(used[board])
+            ret = false;
+        return ret;
+    }
+
+
+>>>>>>> 5f9d5529d9edd94f32935d229df8ecac4ef21426
     /**
     @param      N/A
     @pre        Before this method is called the cursor will be in a random location
@@ -669,7 +683,7 @@ class List {/*{{{*/
     Vehicle* head;
     Vehicle* cursor;
     queue<string> GoodBoards;    //check
-    map<string,bool> boardMap; //check
+    map<string,bool> used; //check
 };/*}}}*/
     /*
     string a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE],int moveNum)
@@ -729,10 +743,7 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
                 cout << ret << endl;
                 c++;
             }
-        }
-        ret+='N';
-        if (moveNum<10)
-        {
+        } ret+='N'; if (moveNum<10) {
             ret+=itoa(moveNum,ret,10);
             cout << ret << endl;
             ret+='M';
@@ -855,7 +866,11 @@ int main ()
     }
     */
 }
+<<<<<<< HEAD
 
+=======
+/*
+>>>>>>> 5f9d5529d9edd94f32935d229df8ecac4ef21426
 void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap) {
     if(carList->isSolved()) {
         if(moveNum <= cap) {
@@ -884,4 +899,35 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
             carList->moveForward(board);
         }
     }
+}
+*/
+
+
+void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&newBoard)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap)
+{
+    for (int i = numVehicles; i > 0; i--)
+    {
+      for (int j = 0; j < 2; j++)
+      {
+        string board_str = carList->a2d2string(newBoard);
+        (j == 0) ? carList->moveForward(newBoard) : carList->moveBackward(newBoard);
+        if (carList->isSolved() == true)
+        {
+          if (moveNum <= cap)
+          {
+            cap = moveNum;
+            solved = true;
+            return;
+          }
+          else
+            return;
+        }
+        else
+        {
+          if (carList->insertBoard(board_str) == true)
+            carList->GoodBoards.push(board_str);
+        }
+      }
+    }
+    solveIt(carList,moveNum,numVehicles,solved,carList->GoodBoards.pop(),cap);
 }
