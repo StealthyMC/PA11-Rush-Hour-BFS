@@ -658,6 +658,8 @@ class List {/*{{{*/
                 ret=r1;
         }
     }
+    queue<string> GoodBoards;    //check
+
    private:
     class Vehicle {
         public:
@@ -679,53 +681,9 @@ class List {/*{{{*/
     int b_size;
     Vehicle* head;
     Vehicle* cursor;
-    queue<string> GoodBoards;    //check
     map<string,bool> used; //check
 };/*}}}*/
-    /*
-    string a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE],int moveNum)
-    {
-        string ret ="";
-        int c=0;
-        for (int i=0;i<5;i++)
-        {
-            for (int j=0;j<5;j++)
-            {
-                ret+=to_string(board[i][j]);
-                c++;
-            }
-        }
-        c++;
-        ret[c]='N';
-        if (moveNum<10)
-        {
-            c++;
-            ret[c]=char(moveNum);
-        }
-        else
-        {
-            string s=to_string(moveNum);
-            char s1=s[0];
-            char s2=s[1];
-            c++;
-            ret[c]=char(s1);
-            c++;
-            ret[c]=char(s2);
-        }
-    }
-    void string2a2d(string input,int (&board)[5][5])
-    {
-        int c=0;
-        for (int i=0;i<5;i++)
-        {
-            for (int j=0;j<5;j++)
-            {
-               board[i][j]=input[c];
-               c++;
-            }
-        }
-    }
-    */
+
 
 void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap);
 
@@ -768,38 +726,6 @@ int main ()
         count++;
     }
 }
-/*
->>>>>>> 5f9d5529d9edd94f32935d229df8ecac4ef21426
-void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap) {
-    if(carList->isSolved()) {
-        if(moveNum <= cap) {
-            cap = moveNum;
-            solved = carList->isSolved();
-            return;
-        }
-    } else if(moveNum >= cap) {
-        return;
-    }
-
-    for(int i=0; i<numVehicles; i++) {
-        carList->setCursor(i);
-
-        if(carList->moveForward(board)) {
-            carList->setCursor(i);
-            solveIt(carList, moveNum+1,numVehicles, solved, board, cap);
-            carList->setCursor(i);
-            carList->moveBackward(board);
-        }
-
-        if(carList->moveBackward(board)) {
-            carList->setCursor(i);
-            solveIt(carList, moveNum+1,numVehicles, solved, board, cap);
-            carList->setCursor(i);
-            carList->moveForward(board);
-        }
-    }
-}
-*/
 
 
 void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&newBoard)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap)
