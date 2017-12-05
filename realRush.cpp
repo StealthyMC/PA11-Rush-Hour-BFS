@@ -255,7 +255,7 @@ class List {/*{{{*/
 
     bool insertBoard(string board)
     {
-
+        cout << board << endl;
         bool ret = true;
         if(used[board])
             ret = false;
@@ -596,7 +596,7 @@ class List {/*{{{*/
      * @exception N/A
      * @note    the chars after N designate the numofmoves
      */
-    string& a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int moveNum)
+    string a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int moveNum)
     {
         string s1="";
         for(int j = 0; j < MAXBOARDSIZE; j++)
@@ -619,6 +619,7 @@ class List {/*{{{*/
             s1.push_back(n1);
             s1.push_back(n2);
         }
+        return s1;
     }
     int string2a2d(string input,int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
     {
@@ -734,12 +735,14 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
         }
         else
         {
-            /*
+            cout << 1 << endl;
           if (carList->insertBoard(carList->a2d2string(board,moveNum)) == true)
           {
+              cout << 2 << endl;
               carList->GoodBoards.push(carList->a2d2string(board,moveNum));
+              cout << 3 << endl;
           }
-          */
+          cout << 4 << endl;
         }
       }
     }
