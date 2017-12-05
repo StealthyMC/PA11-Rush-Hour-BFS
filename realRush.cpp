@@ -738,7 +738,7 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
           if (carList->insertBoard(carList->a2d2string(board,moveNum)) == true)
           {
               carList->GoodBoards.push(carList->a2d2string(board,moveNum));
-              used[board]=true;
+              carList->used[carList->a2d2string(board,moveNum)]=true;
           }
         }
       }
