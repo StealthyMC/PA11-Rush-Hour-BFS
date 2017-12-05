@@ -649,7 +649,7 @@ class List {/*{{{*/
                c++;
             }
         }
-        if (input[c]='N')
+        if (input[c]=='N')
         {
             c++;
             r1=static_cast<int>(input[c])-48;
