@@ -464,7 +464,7 @@ class List {/*{{{*/
         }
         return false;
     }
-
+    //test
     /**
     @param      int (&board)[6][6]
     @pre        Before this method is called the car will be in its initial position
@@ -721,13 +721,23 @@ int main ()
 
 void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap)
 {
-    string s = carList->a2d2string(board,moveNum);
+    cout << carList->GoodBoards.size() << "# of Good Bois" << endl;
+    if (moveNum==100)
+    {
+        cout << "GO KILL YOSELF" << endl;
+        return;
+    }
+    else if(carList->GoodBoards.empty())
+    {
+        cout << "NO GOOD BOIS LEFT" << endl;
+    }
     for (int i = numVehicles; i > 0; i--)
     {
         carList->setCursor(i);
         for (int j = 0; j < 2; j++)
         {
             (j == 0) ? carList->moveForward(board) : carList->moveBackward(board);
+            string s = carList->a2d2string(board,moveNum);
             if (carList->isSolved() == true)
             {
                 if (moveNum <= cap)
@@ -739,11 +749,6 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
                 else
                     return;
             }
-            else if (moveNum==90)
-            {
-                cout << "GO KILL YOSELF" << endl;
-                return;
-            }
             else
             {
                 if (carList->insertBoard(s) == true)
@@ -752,11 +757,12 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
                     carList->used[s]=true;
                 }
             }
-            (j == 0) ? carList->moveBackward(board):carList->moveForward(board);
         }
     }
+    cout << carList->GoodBoards.size() << "# of Good Bois" << endl;
     string newBoard = carList->GoodBoards.front();
     carList->GoodBoards.pop();
+    cout << carList->GoodBoards.size() << "# of Good Bois" << endl;
     moveNum=carList->string2a2d(newBoard,board);
     solveIt(carList,moveNum+1,numVehicles,solved,board,cap);
 }
