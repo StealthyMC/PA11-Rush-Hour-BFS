@@ -250,6 +250,17 @@ class List {/*{{{*/
         return false;
     }
 
+
+
+    bool insertBoard(string board)
+    {
+        bool ret = true;
+        if(used[board])
+            ret = false;
+        return ret;
+    }
+
+
     /**
     @param      N/A
     @pre        Before this method is called the cursor will be in a random location
