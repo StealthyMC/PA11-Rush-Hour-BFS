@@ -253,6 +253,7 @@ class List {/*{{{*/
 
 
 
+    //not nessary map is public now :)
     bool insertBoard(string board)
     {
         bool ret = true;
@@ -623,7 +624,7 @@ class List {/*{{{*/
         }
     }
     queue<string> GoodBoards;
-    map<string,bool> used;
+    map<string,int> used;
    private:
     class Vehicle {
         public:
@@ -689,6 +690,7 @@ int main ()
 void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap)
 {
     cout << carList->GoodBoards.size() << "# of Good Bois" << endl;
+    cout << carList->a2d2string(board) << endl;
     if (moveNum==100)
     {
         cout << "GO KILL YOSELF" << endl;
@@ -697,7 +699,6 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
     else if(carList->GoodBoards.empty())
     {
         cout << "NO GOOD BOIS LEFT" << endl;
-        return;
     }
     for (int i = 0; i < numVehicles; i++)
     {
@@ -705,10 +706,9 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
         for (int j = 0; j < 2; j++)
         {
             (j == 0) ? carList->moveForward(board) : carList->moveBackward(board);
-            string s = carList->a2d2string(board);
             if (carList->isSolved() == true)
             {
-                if (moveNum <= cap)
+                if (moveNum < cap)
                 {
                     cap = moveNum;
                     solved = true;
@@ -719,18 +719,17 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
             }
             else
             {
-                if (carList->insertBoard(s) == true)
+                if (carList->insertBoard(carList->a2d2string(board)) == true)
                 {
-                    carList->GoodBoards.push(s);
-                    carList->used[s]=true;
+                    carList->GoodBoards.push(carList->a2d2string(board));
+                    carList->used[carList->a2d2string(board)]=moveNum;
                 }
             }
         }
     }
-    cout << carList->GoodBoards.size() << "# of Good Bois" << endl;
     string newBoard = carList->GoodBoards.front();
     carList->GoodBoards.pop();
-    cout << carList->GoodBoards.size() << "# of Good Bois" << endl;
-    moveNum=carList->string2a2d(newBoard,board);
-    solveIt(carList,moveNum+1,numVehicles,solved,board,cap);
+    carList->string2a2d(newBoard,board);
+    moveNum=carList->used[newBoard];
+    solveIt(carList,moveNum,numVehicles,solved,board,cap);
 }
