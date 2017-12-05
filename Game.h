@@ -12,6 +12,9 @@ This program is complete and working according to spcecifications,
 according to the best of my knowledge.
 */
 
+// Prototype for vehicle class
+class Vehicle;
+
 #include <iostream>
 using namespace std;
 
