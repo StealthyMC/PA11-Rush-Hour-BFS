@@ -720,6 +720,7 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
     string s = carList->a2d2string(board,moveNum);
     for (int i = numVehicles; i > 0; i--)
     {
+        carList->setCursor(i);
       for (int j = 0; j < 2; j++)
       {
         (j == 0) ? carList->moveForward(board) : carList->moveBackward(board);
@@ -742,6 +743,7 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
               carList->used[s]=true;
           }
         }
+        (j == 0) ? carList->moveBackward(board):carList->moveForward(board);
       }
     }
     string newBoard = carList->GoodBoards.front();
