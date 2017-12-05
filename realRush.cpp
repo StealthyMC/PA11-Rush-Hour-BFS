@@ -382,8 +382,8 @@ class List {/*{{{*/
     **/
     void updateBoard(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE]) {
         Vehicle * save_ptr = cursor;
-        for(int i = 0; i<b_size; i++) {
-            for(int j = 0; j<b_size; j++) {
+        for(int i = 0; i<MAXBOARDSIZE; i++) {
+            for(int j = 0; j<MAXBOARDSIZE; j++) {
                 board[i][j] = 0;
             }
         }
@@ -500,7 +500,7 @@ class List {/*{{{*/
         if(cursor->m_size==2) {
             if(cursor->m_orient == 'V') {
                 if(forward) {
-                    if(cursor->m_row+2 < b_size && board[cursor->m_row+2][cursor->m_col] == 0)
+                    if(cursor->m_row+2 < MAXBOARDSIZE && board[cursor->m_row+2][cursor->m_col] == 0)
                         return false;
                     else
                         return true;
@@ -513,7 +513,7 @@ class List {/*{{{*/
             }
             if(cursor->m_orient == 'H') {
                 if(forward) {
-                    if(cursor->m_col+2 < b_size && board[cursor->m_row][cursor->m_col+2] == 0)
+                    if(cursor->m_col+2 < MAXBOARDSIZE && board[cursor->m_row][cursor->m_col+2] == 0)
                         return false;
                     else
                         return true;
@@ -528,7 +528,7 @@ class List {/*{{{*/
         if(cursor->m_size==3) {
             if(cursor->m_orient == 'V') {
                 if(forward) {
-                    if(cursor->m_row+3 < b_size && board[cursor->m_row+3][cursor->m_col] == 0)
+                    if(cursor->m_row+3 < MAXBOARDSIZE && board[cursor->m_row+3][cursor->m_col] == 0)
                         return false;
                     else
                         return true;
@@ -541,7 +541,7 @@ class List {/*{{{*/
             }
             if(cursor->m_orient == 'H') {
                 if(forward) {
-                    if(cursor->m_col+3 < b_size && board[cursor->m_row][cursor->m_col+3] == 0)
+                    if(cursor->m_col+3 < MAXBOARDSIZE && board[cursor->m_row][cursor->m_col+3] == 0)
                         return false;
                     else
                         return true;
@@ -620,6 +620,7 @@ class List {/*{{{*/
             s1.push_back(n2);
         }
         s1.push_back('M');
+        cout << s1 << endl;
         return s1;
     }
     int string2a2d(string input,int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
@@ -627,10 +628,12 @@ class List {/*{{{*/
         int c=0;
         int ret=1000;
         int r1,r2=0;
-        for (int i=0;i<b_size;i++)
+        cout << "STRING" << endl;
+        for (int i=0;i<MAXBOARDSIZE;i++)
         {
-            for (int j=0;j<b_size;j++)
+            for (int j=0;j<MAXBOARDSIZE;j++)
             {
+                cout << "STRING: " << input << endl;
                board[i][j]=input[c]-48;
                c++;
             }
@@ -638,7 +641,7 @@ class List {/*{{{*/
         if (input[c]=='N')
         {
             c++;
-            r1=static_cast<int>(input[c])-48;
+            r1=int(input[c])-48;
             c++;
             if (input[c]!='M')
             {
@@ -650,8 +653,8 @@ class List {/*{{{*/
         }
         return ret;
     }
-    queue<string> GoodBoards;    //check
-    map<string,bool> used; //check
+    queue<string> GoodBoards;
+    map<string,bool> used;
    private:
     class Vehicle {
         public:
@@ -670,7 +673,6 @@ class List {/*{{{*/
             int m_col;
             Vehicle* next;
     };
-    int b_size;
     Vehicle* head;
     Vehicle* cursor;
 };/*}}}*/
@@ -721,33 +723,33 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
     for (int i = numVehicles; i > 0; i--)
     {
         carList->setCursor(i);
-      for (int j = 0; j < 2; j++)
-      {
-        (j == 0) ? carList->moveForward(board) : carList->moveBackward(board);
-        if (carList->isSolved() == true)
+        for (int j = 0; j < 2; j++)
         {
-          if (moveNum <= cap)
-          {
-            cap = moveNum;
-            solved = true;
-            return;
-          }
-          else
-            return;
+            (j == 0) ? carList->moveForward(board) : carList->moveBackward(board);
+            if (carList->isSolved() == true)
+            {
+                if (moveNum <= cap)
+                {
+                    cap = moveNum;
+                    solved = true;
+                    return;
+                }
+                else
+                    return;
+            }
+            else
+            {
+                if (carList->insertBoard(s) == true)
+                {
+                    carList->GoodBoards.push(s);
+                    carList->used[s]=true;
+                }
+            }
+            (j == 0) ? carList->moveBackward(board):carList->moveForward(board);
         }
-        else
-        {
-          if (carList->insertBoard(s) == true)
-          {
-              carList->GoodBoards.push(s);
-              carList->used[s]=true;
-          }
-        }
-        (j == 0) ? carList->moveBackward(board):carList->moveForward(board);
-      }
     }
     string newBoard = carList->GoodBoards.front();
     carList->GoodBoards.pop();
     moveNum=carList->string2a2d(newBoard,board);
-    solveIt(carList,moveNum,numVehicles,solved,board,cap);
+    solveIt(carList,moveNum+1,numVehicles,solved,board,cap);
 }
