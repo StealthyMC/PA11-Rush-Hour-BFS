@@ -703,28 +703,43 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
     for (int i = 0; i < numVehicles; i++)
     {
         carList->setCursor(i);
-        for (int j = 0; j < 2; j++)
+        if (carList->moveForward(board))
         {
-            (j == 0) ? carList->moveForward(board) : carList->moveBackward(board);
-            if (carList->isSolved() == true)
+            if (carList->insertBoard(carList->a2d2string(board)) == true)
             {
-                if (moveNum < cap)
-                {
-                    cap = moveNum;
-                    solved = true;
-                    return;
-                }
-                else
-                    return;
+                carList->GoodBoards.push(carList->a2d2string(board));
+                carList->used[carList->a2d2string(board)]=moveNum;
+            }
+        } 
+        if (carList->isSolved() == true)
+        {
+            if (moveNum < cap)
+            {
+                cap = moveNum;
+                solved = true;
+                return;
             }
             else
+                return;
+        }
+        if (carList->moveBackward(board))
+        {
+            if (carList->insertBoard(carList->a2d2string(board)) == true)
             {
-                if (carList->insertBoard(carList->a2d2string(board)) == true)
-                {
-                    carList->GoodBoards.push(carList->a2d2string(board));
-                    carList->used[carList->a2d2string(board)]=moveNum;
-                }
+                carList->GoodBoards.push(carList->a2d2string(board));
+                carList->used[carList->a2d2string(board)]=moveNum;
             }
+        }
+        if (carList->isSolved() == true)
+        {
+            if (moveNum < cap)
+            {
+                cap = moveNum;
+                solved = true;
+                return;
+            }
+            else
+                return;
         }
     }
     string newBoard = carList->GoodBoards.front();
