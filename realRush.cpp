@@ -41,6 +41,9 @@ included in this file. All have passed the test cases and are working properly.
 #include <queue>
 #include <string>
 
+#include <sstream>
+
+
 using namespace std;
 
 const int MAXBOARDSIZE = 100;
@@ -769,7 +772,7 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&n
     {
       for (int j = 0; j < 2; j++)
       {
-        string board_str = carList->a2d2string(newBoard);
+        string board_str = carList->a2d2string(newBoard, moveNum);
         (j == 0) ? carList->moveForward(newBoard) : carList->moveBackward(newBoard);
         if (carList->isSolved() == true)
         {
