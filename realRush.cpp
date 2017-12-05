@@ -596,7 +596,7 @@ class List {/*{{{*/
      */
     string& a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int moveNum)
     {
-        string s1;
+        string s1="";
         for(int j = 0; j < MAXBOARDSIZE; j++)
         {
             for(int i = 0; i < MAXBOARDSIZE; i++)
