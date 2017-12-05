@@ -255,7 +255,6 @@ class List {/*{{{*/
 
     bool insertBoard(string board)
     {
-        cout << board << endl;
         bool ret = true;
         if(used[board])
             ret = false;
@@ -652,7 +651,7 @@ class List {/*{{{*/
         return ret;
     }
     queue<string> GoodBoards;    //check
-
+    map<string,bool> used; //check
    private:
     class Vehicle {
         public:
@@ -674,7 +673,6 @@ class List {/*{{{*/
     int b_size;
     Vehicle* head;
     Vehicle* cursor;
-    map<string,bool> used; //check
 };/*}}}*/
 
 
@@ -737,23 +735,16 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
         }
         else
         {
-            cout << 1 << endl;
           if (carList->insertBoard(carList->a2d2string(board,moveNum)) == true)
           {
-              cout << 2 << endl;
               carList->GoodBoards.push(carList->a2d2string(board,moveNum));
-              cout << 3 << endl;
+              used[board]=true;
           }
-          cout << 4 << endl;
         }
       }
     }
     string newBoard = carList->GoodBoards.front();
-    cout << 5 << endl;
     carList->GoodBoards.pop();
-    cout << 6 << endl;
-    carList->string2a2d(newBoard,board);
-    cout << 7 << endl;
+    moveNum=carList->string2a2d(newBoard,board);
     solveIt(carList,moveNum,numVehicles,solved,board,cap);
-    cout << 8 << endl;
 }
