@@ -43,7 +43,7 @@ included in this file. All have passed the test cases and are working properly.
 
 using namespace std;
 
-const int MAXBOARDSIZE = 100;
+const int MAXBOARDSIZE = 6;
 
 class List {/*{{{*/
   public:
@@ -594,40 +594,16 @@ class List {/*{{{*/
      * @exception N/A
      * @note    the chars after N designate the numofmoves
      */
-    string a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE],int moveNum)
+    string& a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int moveNum)
     {
-        string ret ="";
-        int c=0;
-        for (int i=0;i<5;i++)
+        string s1;
+        for(int j = 0; j < MAXBOARDSIZE; j++)
         {
-            for (int j=0;j<5;j++)
+            for(int i = 0; i < MAXBOARDSIZE; i++)
             {
-                ret+=itoa(board[i][j],ret,10);
-                c++;
+                char c = '0' + board[i][j];
+                s1.push_back(c);
             }
-        }
-        c++;
-        ret[c]='N';
-        if (moveNum<10)
-        {
-            c++;
-            ret[c]='N';
-            c++;
-            ret[c]=char(moveNum);
-        }
-        else
-        {
-            string s=itoa(moveNum,s,10);
-            char s1=s[0];
-            char s2=s[1];
-            c++;
-            ret[c]='N';
-            c++;
-            ret[c]=char(s1);
-            c++;
-            ret[c]=char(s2);
-            c++;
-            ret[c]='M';
         }
     }
     int string2a2d(string input,int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
@@ -689,7 +665,6 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
 
 int main ()
 {
-  cout << "hello world!" << endl;
     int board[MAXBOARDSIZE][MAXBOARDSIZE] = {0};
 
     int count = 1;
@@ -714,9 +689,6 @@ int main ()
         carList->gotoBeginning();
         carList->updateBoard(board);
         carList->printBoard(board);
-        string test = carList->a2d2string(board,moves);
-        cout << test;
-        carList->printBoard(board);
         solveIt(carList, moves, numCars, solved, board, cap);
         if(solved)
             cout << "Scenario " << count << " requires "  << cap << " moves"<< endl;
@@ -728,14 +700,13 @@ int main ()
 }
 
 
-void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&newBoard)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap)
+void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap)
 {
     for (int i = numVehicles; i > 0; i--)
     {
       for (int j = 0; j < 2; j++)
       {
-        string board_str = carList->a2d2string(newBoard);
-        (j == 0) ? carList->moveForward(newBoard) : carList->moveBackward(newBoard);
+        (j == 0) ? carList->moveForward(board) : carList->moveBackward(board);
         if (carList->isSolved() == true)
         {
           if (moveNum <= cap)
@@ -749,10 +720,13 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&n
         }
         else
         {
-          if (carList->insertBoard(board_str) == true)
-            carList->GoodBoards.push(board_str);
+          if (carList->insertBoard(carList->a2d2string(board,moveNum)) == true)
+            carList->GoodBoards.push(carList->a2d2string(board,moveNum));
         }
       }
     }
-    solveIt(carList,moveNum,numVehicles,solved,carList->GoodBoards.pop(),cap);
+    string newBoard = carList->GoodBoards.front();
+    carList->GoodBoards.pop();
+    carList->string2a2d(newBoard,board);
+    solveIt(carList,moveNum,numVehicles,solved,board,cap);
 }
