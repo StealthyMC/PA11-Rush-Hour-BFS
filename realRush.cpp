@@ -680,7 +680,7 @@ class List {/*{{{*/
     Vehicle* head;
     Vehicle* cursor;
     queue<string> GoodBoards;    //check
-    map<string,bool> boardMap; //check
+    map<string,bool> used; //check
 };/*}}}*/
     /*
     string a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE],int moveNum)
@@ -901,8 +901,8 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&n
     {
       for (int j = 0; j < 2; j++)
       {
-        string board_str = carList->a2d2string(board);
-        (j == 0) ? carList->moveForward() : carList->moveBackward();
+        string board_str = carList->a2d2string(newBoard);
+        (j == 0) ? carList->moveForward(newBoard) : carList->moveBackward(newBoard);
         if (carList->isSolved() == true)
         {
           if (moveNum <= cap)
@@ -921,5 +921,5 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&n
         }
       }
     }
-    solveIt(carList,moveNum,numVehicles,solved,GoodBoards.pop(),cap);
+    solveIt(carList,moveNum,numVehicles,solved,carList->GoodBoards.pop(),cap);
 }
