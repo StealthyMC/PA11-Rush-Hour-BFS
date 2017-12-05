@@ -33,7 +33,8 @@ included in this file. All have passed the test cases and are working properly.
  * Programmer       : Student, Jared Knutson, Ian Grant, Andrew McIntrye
  * Project Number   : 11
  * Date Due         : 12/06/2017
- */
+ }}}*/
+
 #include <iostream>
 #include <cstdlib>
 #include <cstddef>
