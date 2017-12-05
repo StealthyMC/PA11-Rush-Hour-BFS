@@ -250,9 +250,6 @@ class List {/*{{{*/
         return false;
     }
 
-<<<<<<< HEAD
-=======
-
 
     bool insertBoard(string board)
     {
@@ -262,8 +259,6 @@ class List {/*{{{*/
         return ret;
     }
 
-
->>>>>>> 5f9d5529d9edd94f32935d229df8ecac4ef21426
     /**
     @param      N/A
     @pre        Before this method is called the cursor will be in a random location
@@ -801,7 +796,6 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
 
 int main ()
 {
-  cout << "hello world!" << endl;
     int board[MAXBOARDSIZE][MAXBOARDSIZE] = {0};
     int bs=5;
     for (int i=0;i<5;i++)
@@ -866,9 +860,7 @@ int main ()
     }
     */
 }
-<<<<<<< HEAD
 
-=======
 /*
 >>>>>>> 5f9d5529d9edd94f32935d229df8ecac4ef21426
 void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap) {
