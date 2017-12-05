@@ -250,8 +250,6 @@ class List {/*{{{*/
         return false;
     }
 
-<<<<<<< HEAD
-=======
 
 
     bool insertBoard(string board)
@@ -263,7 +261,6 @@ class List {/*{{{*/
     }
 
 
->>>>>>> 5f9d5529d9edd94f32935d229df8ecac4ef21426
     /**
     @param      N/A
     @pre        Before this method is called the cursor will be in a random location
@@ -683,7 +680,6 @@ class List {/*{{{*/
     Vehicle* head;
     Vehicle* cursor;
     queue<string> GoodBoards;    //check
-<<<<<<< HEAD
     map<string,bool> used; //check
 };/*}}}*/
     /*
@@ -730,11 +726,6 @@ class List {/*{{{*/
         }
     }
     */
-void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap);
-=======
-    map<string,bool> boardMap; //check
-};
->>>>>>> master
 
 void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap);
 
@@ -777,9 +768,6 @@ int main ()
         count++;
     }
 }
-<<<<<<< HEAD
-
-=======
 /*
 >>>>>>> 5f9d5529d9edd94f32935d229df8ecac4ef21426
 void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap) {
