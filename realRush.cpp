@@ -635,7 +635,7 @@ class List {/*{{{*/
                c++;
             }
         }
-        if (input[c]='N')
+        if (input[c]=='N')
         {
             c++;
             r1=static_cast<int>(input[c])-48;
@@ -717,6 +717,7 @@ int main ()
 
 void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap)
 {
+    string s = carList->a2d2string(board,moveNum);
     for (int i = numVehicles; i > 0; i--)
     {
       for (int j = 0; j < 2; j++)
@@ -735,10 +736,10 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
         }
         else
         {
-          if (carList->insertBoard(carList->a2d2string(board,moveNum)) == true)
+          if (carList->insertBoard(s) == true)
           {
-              carList->GoodBoards.push(carList->a2d2string(board,moveNum));
-              carList->used[carList->a2d2string(board,moveNum)]=true;
+              carList->GoodBoards.push(s);
+              carList->used[s]=true;
           }
         }
       }
