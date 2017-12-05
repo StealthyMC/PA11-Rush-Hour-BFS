@@ -681,151 +681,13 @@ class List {/*{{{*/
     Vehicle* cursor;
     queue<string> GoodBoards;    //check
     map<string,bool> boardMap; //check
-};/*}}}*/
-    /*
-    string a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE],int moveNum)
-    {
-        string ret ="";
-        int c=0;
-        for (int i=0;i<5;i++)
-        {
-            for (int j=0;j<5;j++)
-            {
-                ret+=to_string(board[i][j]);
-                c++;
-            }
-        }
-        c++;
-        ret[c]='N';
-        if (moveNum<10)
-        {
-            c++;
-            ret[c]=char(moveNum);
-        }
-        else
-        {
-            string s=to_string(moveNum);
-            char s1=s[0];
-            char s2=s[1];
-            c++;
-            ret[c]=char(s1);
-            c++;
-            ret[c]=char(s2);
-        }
-    }
-    void string2a2d(string input,int (&board)[5][5])
-    {
-        int c=0;
-        for (int i=0;i<5;i++)
-        {
-            for (int j=0;j<5;j++)
-            {
-               board[i][j]=input[c];
-               c++;
-            }
-        }
-    }
-    */
+};
+
 void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap);
-
-    string a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE],int moveNum)
-    {
-        string ret ="";
-        int c=0;
-        for (int i=0;i<5;i++)
-        {
-            for (int j=0;j<5;j++)
-            {
-                ret+=itoa(board[i][j],ret,10);
-                cout << ret << endl;
-                c++;
-            }
-        } ret+='N'; if (moveNum<10) {
-            ret+=itoa(moveNum,ret,10);
-            cout << ret << endl;
-            ret+='M';
-            cout << ret << endl;
-        }
-        else
-        {
-            ret+=itoa(moveNum,ret,10);
-            char s1=ret[0];
-            char s2=ret[1];
-            ret+=char(s1);
-            cout << ret << endl;
-            ret+=char(s2);
-            cout << ret << endl;
-            ret+='M';
-            cout << ret << endl;
-        }
-        return ret;
-    }
-    int string2a2d(string input,int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
-    {
-        cout << input << endl;
-        int c=0;
-        int ret=1000;
-        for (int i=0;i<5;i++)
-        {
-            for (int j=0;j<5;j++)
-            {
-                board[i][j]=input[c]-48;
-                c++;
-            }
-        }
-        //int pos = input.find('N');
-        //int end = input.find('M');
-        //int result=0;
-        //string retS=input.substr(pos,end);
-        c++;
-        cout << c<<endl;
-        char a=input[c];
-        cout << a<<endl;
-
-        int r1=int(a)-48;
-        c++;
-        if (input[c]!='M')
-        {
-            char b = input[c];
-            cout << b << endl;
-            int r2=int(b)-48;
-            r1=r1*10;
-            ret=r1+r2;
-            return ret;
-        }
-        return r1;
-    }
 
 int main ()
 {
     int board[MAXBOARDSIZE][MAXBOARDSIZE] = {0};
-    int bs=5;
-    for (int i=0;i<5;i++)
-    {
-        for (int j=0;j<5;j++)
-        {
-            cout << board[i][j]<< " ";
-        }
-        cout << endl;
-    }
-   // board[4][3]=1;
-   // board[3][2]=1;
-    cout << " STRING" << endl;
-    string testS = a2d2string(board,bs);
-    cout <<testS<<endl;
-    cout << " STRING TO ARRAY" << endl;
-    int test2[MAXBOARDSIZE][MAXBOARDSIZE] = {1};
-    int num = string2a2d(testS,test2);
-    for (int i=0;i<5;i++)
-    {
-        for (int j=0;j<5;j++)
-        {
-            cout << test2[i][j] << " ";
-        }
-        cout << endl;
-    }
-    cout << "NUM " << num << endl;
-    /*
 
     int count = 1;
     while(true) {
@@ -860,7 +722,6 @@ int main ()
         delete carList;
         count++;
     }
-    */
 }
 /*
 void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&board)[MAXBOARDSIZE][MAXBOARDSIZE], int &cap) {
