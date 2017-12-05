@@ -612,7 +612,7 @@ class List {/*{{{*/
             char n = '0' +moveNum;
             s1.push_back(n);
         }
-        if (moveNum > 10)
+        if (moveNum >= 10)
         {
             char n1 = '0' + (moveNum/10);
             char n2 = '0' + (moveNum%10);
@@ -620,7 +620,6 @@ class List {/*{{{*/
             s1.push_back(n2);
         }
         s1.push_back('M');
-        cout << s1 << endl;
         return s1;
     }
     int string2a2d(string input,int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
@@ -628,24 +627,27 @@ class List {/*{{{*/
         int c=0;
         int ret=1000;
         int r1,r2=0;
-        cout << "STRING" << endl;
         for (int i=0;i<MAXBOARDSIZE;i++)
         {
             for (int j=0;j<MAXBOARDSIZE;j++)
             {
-                cout << "STRING: " << input << endl;
                board[i][j]=input[c]-48;
                c++;
             }
         }
+        cout << input << endl;
         if (input[c]=='N')
         {
             c++;
+            cout << input[c] << endl;
             r1=int(input[c])-48;
+            cout << r1 << endl;
             c++;
             if (input[c]!='M')
             {
-                r2=static_cast<int>(input[c])-48;
+                cout << input[c] << endl;
+                r2=int(input[c])-48;
+                cout << r2 << endl;
                 r1=r1*10;
                 r1+=r2;
             }
@@ -736,6 +738,11 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
                 }
                 else
                     return;
+            }
+            else if (moveNum==90)
+            {
+                cout << "GO KILL YOSELF" << endl;
+                return;
             }
             else
             {
