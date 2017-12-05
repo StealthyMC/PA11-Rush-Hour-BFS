@@ -607,6 +607,7 @@ class List {/*{{{*/
                 s1.push_back(c);
             }
         }
+        s1.push_back('N');
         if (moveNum < 10)
         {
             char n = '0' +moveNum;
@@ -619,6 +620,7 @@ class List {/*{{{*/
             s1.push_back(n1);
             s1.push_back(n2);
         }
+        s1.push_back('M');
         return s1;
     }
     int string2a2d(string input,int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
@@ -645,9 +647,9 @@ class List {/*{{{*/
                 r1=r1*10;
                 r1+=r2;
             }
-            else
-                ret=r1;
+            ret=r1;
         }
+        return ret;
     }
     queue<string> GoodBoards;    //check
 
@@ -747,7 +749,11 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
       }
     }
     string newBoard = carList->GoodBoards.front();
+    cout << 5 << endl;
     carList->GoodBoards.pop();
+    cout << 6 << endl;
     carList->string2a2d(newBoard,board);
+    cout << 7 << endl;
     solveIt(carList,moveNum,numVehicles,solved,board,cap);
+    cout << 8 << endl;
 }
