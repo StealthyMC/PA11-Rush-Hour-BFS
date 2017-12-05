@@ -605,6 +605,18 @@ class List {/*{{{*/
                 s1.push_back(c);
             }
         }
+                if (moveNum < 10)
+                {
+                    char n = '0' +moveNum;
+                    s1.push_back(n);
+                }
+                if (moveNum > 10)
+                {
+                    char n1 = '0' + (moveNum/10);
+                    char n2 = '0' + (moveNum%10);
+                    s1.push_back(n1);
+                    s1.push_back(n2);
+                }
     }
     int string2a2d(string input,int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
     {
