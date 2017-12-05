@@ -606,23 +606,9 @@ class List {/*{{{*/
                 s1.push_back(c);
             }
         }
-        s1.push_back('N');
-        if (moveNum < 10)
-        {
-            char n = '0' +moveNum;
-            s1.push_back(n);
-        }
-        if (moveNum >= 10)
-        {
-            char n1 = '0' + (moveNum/10);
-            char n2 = '0' + (moveNum%10);
-            s1.push_back(n1);
-            s1.push_back(n2);
-        }
-        s1.push_back('M');
         return s1;
     }
-    int string2a2d(string input,int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
+    void string2a2d(string input,int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
     {
         int c=0;
         int ret=1000;
@@ -635,25 +621,6 @@ class List {/*{{{*/
                c++;
             }
         }
-        cout << input << endl;
-        if (input[c]=='N')
-        {
-            c++;
-            cout << input[c] << endl;
-            r1=int(input[c])-48;
-            cout << r1 << endl;
-            c++;
-            if (input[c]!='M')
-            {
-                cout << input[c] << endl;
-                r2=int(input[c])-48;
-                cout << r2 << endl;
-                r1=r1*10;
-                r1+=r2;
-            }
-            ret=r1;
-        }
-        return ret;
     }
     queue<string> GoodBoards;
     map<string,bool> used;
@@ -730,14 +697,15 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
     else if(carList->GoodBoards.empty())
     {
         cout << "NO GOOD BOIS LEFT" << endl;
+        return;
     }
-    for (int i = numVehicles; i > 0; i--)
+    for (int i = 0; i < numVehicles; i++)
     {
         carList->setCursor(i);
         for (int j = 0; j < 2; j++)
         {
             (j == 0) ? carList->moveForward(board) : carList->moveBackward(board);
-            string s = carList->a2d2string(board,moveNum);
+            string s = carList->a2d2string(board,moveNum+1);
             if (carList->isSolved() == true)
             {
                 if (moveNum <= cap)
