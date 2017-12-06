@@ -431,7 +431,7 @@ public:
    * @exception N/A
    * @note    the chars after N designate the numofmoves
    */
-  string a2d2string()
+  string boardToString()
   {
       string s1="";
       for(int j = 0; j < 6; j++)
