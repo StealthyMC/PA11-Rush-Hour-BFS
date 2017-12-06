@@ -65,23 +65,24 @@ int SolveIt(int car_num)
   for (int i = 0; i < car_num; i++)
   {
     /// Orient the cursor.
-    setCursor(i);
+    board.setCursor(i);
     /** Attempt to move the car in both directions. If a certain move results
     in no collisions, the move is valid. If the move is valid, queue the current
     state of the board. */
-    if (cursor->moveForward() == true)
+    if (board.moveForward() == true)
     {
       board_queue.push(board);
-      cursor->moveBackward();
+      board.moveBackward();
     }
-    if (cursor->moveBackward() == true)
+    if (board.moveBackward() == true)
     {
       board_queue.push(board);
-      cursor->moveForward();
+      board.moveForward();
     }
+    board_queue.pop();
   }
 
-  board.printBoard();
+  //board.printBoard();
   return 1;
 }
 
