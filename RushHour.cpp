@@ -35,6 +35,7 @@ using namespace std;
 
 int SolveIt(int car_num)
 {
+    int move_num=0;
   /*  ALGORITHM
 
   - perform moves on all cars
@@ -69,21 +70,23 @@ int SolveIt(int car_num)
     /** Attempt to move the car in both directions. If a certain move results
     in no collisions, the move is valid. If the move is valid, queue the current
     state of the board. */
-    if (board.moveForward() == true)
+    if (board.moveForward() == true && board_map[board.a2d2string(lot)])
     {
       board_queue.push(board);
+      board_map[board.a2d2string(lot)]=move_num;
       board.moveBackward();
     }
-    if (board.moveBackward() == true)
+    if (board.moveBackward() == true && board_map[board.a2d2string(lot)])
     {
       board_queue.push(board);
+      board_map[board.a2d2string(lot)]=move_num;
       board.moveForward();
     }
     board_queue.pop();
   }
 
   //board.printBoard();
-  return 1;
+  return move_num;
 }
 
 int main()
