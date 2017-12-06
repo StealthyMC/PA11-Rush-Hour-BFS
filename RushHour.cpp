@@ -71,21 +71,28 @@ int SolveIt(int car_num)
   {
     /// Orient the cursor.
     board.setCursor(i);
-    cout << i << endl;
     /** Attempt to move the car in both directions. If a certain move results
     in no collisions, the move is valid. If the move is valid, queue the current
     state of the board. */
-    if (board.moveForward() == true && board_map[board.a2d2string(lot)])
+    if (board.moveForward() == true && board_map[board.a2d2string()] == false)
     {
       board_queue.push(board);
-      board_map[board.a2d2string(lot)]=move_num;
+      cout << "Queued" << endl;
+      board_map[board.a2d2string()]=move_num;
       board.moveBackward();
     }
-    if (board.moveBackward() == true && board_map[board.a2d2string(lot)])
+    if (board.moveBackward() == true && board_map[board.a2d2string()] == false)
     {
       board_queue.push(board);
-      board_map[board.a2d2string(lot)]=move_num;
+      cout << "Queued" << endl;
+      board_map[board.a2d2string()]=move_num;
       board.moveForward();
+    }
+    if (board_queue.empty() == false)
+    {
+      cout << "hello" << endl;
+      Board temp = board_queue.front();
+      board_queue.pop();
     }
   }
 
