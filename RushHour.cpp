@@ -58,40 +58,43 @@ int SolveIt(int car_num)
   /// Set up the board based on input.
   Board board;
   board.readInput(car_num);
-  board.printBoard();
   /// Set up queue for boards to solve.
   queue<Board> board_queue;
   /// Set up a map so that duplicate boards can be checked.
   map<string, int> board_map;
-
   board_queue.push(board);
-  board_queue.pop();
-
-  for (int i = 0; i < car_num; i++)
-  {
-    /// Orient the cursor.
-    board.setCursor(i);
-    /** Attempt to move the car in both directions. If a certain move results
-    in no collisions, the move is valid. If the move is valid, queue the current
-    state of the board. */
-    if (board.moveForward() == true && board_map[board.a2d2string()] == false)
-    {
-      board_queue.push(board);
-      board_map[board.a2d2string()] = move_num;
-      board.moveBackward();
-    }
-    if (board.moveBackward() == true && board_map[board.a2d2string()] == false)
-    {
-      board_queue.push(board);
-      board_map[board.a2d2string()] = move_num;
-      board.moveForward();
-    }
-  }
 
   while (board_queue.empty() == false)
   {
+    for (int i = 0; i < car_num; i++)
+    {
+      /// Orient the cursor.
+      board.setCursor(i);
+      /** Attempt to move the car in both directions. If a certain move results
+      in no collisions, the move is valid. If the move is valid, queue the current
+      state of the board. */
+      if (board.moveForward() == true)
+      {
+        if (board_map.count(board.a2d2string()) == 0)
+        {
+          board_queue.push(board);
+          board_map[board.a2d2string()] = move_num;
+          board.moveBackward();
+        }
+      }
+      if (board.moveBackward() == true)
+      {
+        if (board_map.count(board.a2d2string()) == 0)
+        {
+          board_queue.push(board);
+          board_map[board.a2d2string()] = move_num;
+          board.moveForward();
+        }
+      }
+    }
     Board& temp = board_queue.front();
     temp.printBoard();
+    cout << board_queue.size() << endl;
     board_queue.pop();
   }
 
