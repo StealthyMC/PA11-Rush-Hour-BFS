@@ -33,17 +33,56 @@ method on the car that the cursor pointer is pointing to.
 
 using namespace std;
 
-void SolveIt(Board& board, int move_num, int car_num, int& cap, bool& solved)
+int SolveIt(int vehicle_num)
 {
-  
+  /*  ALGORITHM
+
+  - perform move
+
+  - if move returns true
+    true: insert into map and move in opposite direction
+    false: don't
+
+  - have we seen this board?
+    no: enqueue
+    yes: don't
+
+
+  - run isSolved on board in queue
+
+  */
+
+  /// Set up the board based on input.
+  Board board;
+  board.initBoard();
+  board.readInput(car_num);
+
+  /// Set up queue for boards to solve.
+  queue<Board> solution;
+  /// Set up a map so that duplicate boards can be checked.
+  map<string, int> board_map;
+
+
 }
 
 int main()
 {
-  /// Initialize board.
-  Board lot;
-
-  lot.printBoard();
+  /// Initiate variable to fetch the number of cars.
+  int car_num = 0;
+  /// Set the scenario to start at scenario #1.
+  int scenario = 1;
+  /// Perform a tail read to fetch the number of cars.
+  cin >> car_num;
+  while (car_num != 0)
+  {
+    int moves = SolveIt(car_num);
+    /// Print final message.
+    cout << "Scenario " << scenario << " requires " << moves << " moves" << endl;
+    /** Once the number of moves is posted, increment the scenario variable to
+    indicate the end of the scenario. */
+    scenario++;
+    cin >> car_num;
+  }
 
   return 0;
 }

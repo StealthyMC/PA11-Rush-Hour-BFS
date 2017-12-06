@@ -375,6 +375,27 @@ public:
     cout << endl;
   }
 
+  void readInput(int car_num)
+  {
+    cout << "Hello" << endl;
+    if (car_num > 0)
+    {
+      int length, row, col;
+      char orient;
+      for (int i = car_num; i > 0; i--)
+      {
+        /// Create variables that will read in data, which will then be inserted.
+        cin >> length;
+        cin >> orient;
+        cin >> row;
+        cin >> col;
+
+        /// Insert car based on stats.
+        insert(length, orient, row, col);
+      }
+    }
+  }
+
 private:
   class Vehicle
   {
