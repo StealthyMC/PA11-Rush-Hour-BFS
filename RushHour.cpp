@@ -77,6 +77,7 @@ int SolveIt(int car_num)
       {
         if (board_map.count(board.a2d2string()) == 0)
         {
+          board.printBoard();
           board_queue.push(board);
           board_map[board.a2d2string()] = move_num;
           board.moveBackward();
@@ -86,15 +87,17 @@ int SolveIt(int car_num)
       {
         if (board_map.count(board.a2d2string()) == 0)
         {
+          board.printBoard();
           board_queue.push(board);
           board_map[board.a2d2string()] = move_num;
           board.moveForward();
         }
       }
     }
-    Board& temp = board_queue.front();
-    temp.printBoard();
-    cout << board_queue.size() << endl;
+    if (board.isSolved())
+    {
+        return board_map[board.a2d2string()];
+    }
     board_queue.pop();
   }
 
