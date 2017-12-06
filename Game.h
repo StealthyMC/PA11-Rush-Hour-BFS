@@ -1,4 +1,5 @@
 /**
+@author Jared Knutson, Ian Grant, Andrew McIntyre
 @details The Board class manages all of the Vehicle objects within it, which does so by
 modifying an array and moving the car around by changing their row and column
 positions. The Vehicles inside of the Board class act as a Linked List, and
@@ -43,8 +44,20 @@ public:
     Vehicle* ptr = other.head;
     while (ptr != NULL)
     {
+<<<<<<< HEAD
       insert(ptr->length, ptr->orient, ptr->row, ptr->col);
       ptr = ptr->next;
+=======
+      while (p->next != NULL)
+      {
+        Vehicle* prev = cursor;  // keep track of previous node in list
+        cursor = new Vehicle(p->length, p->orient, p->row,p->col, NULL);
+        prev->next = cursor;      // update next pointer
+
+        gotoNext();               // move to next node (self)
+        p = p->next;
+      }
+>>>>>>> a4e31e3c03bf77478f9f8075aeda875f868e966c
     }
 
   }
@@ -74,8 +87,28 @@ public:
     Vehicle* ptr = other.head;
     while (ptr != NULL)
     {
+<<<<<<< HEAD
       insert(ptr->length, ptr->orient, ptr->row, ptr->col);
       ptr = ptr->next;
+=======
+      while (p->next != NULL)
+      {
+        Vehicle* prev = cursor;  // keep track of previous node in list
+        cursor = new Vehicle(p->length, p->orient, p->row,p->col, NULL);
+        prev->next = cursor;      // update next pointer
+
+        gotoNext();               // move to next node (self)
+        p = p->next;
+      }
+    }
+    cursor = head;    // reset cursor
+    cout << 5 << endl;
+    // copy the array
+    for (int i = 0; i < 6; i++)
+    {
+      for (int j = 0; j < 6; j++)
+        lot[i][j] = other.lot[i][j];
+>>>>>>> a4e31e3c03bf77478f9f8075aeda875f868e966c
     }
     return *this;
   }
