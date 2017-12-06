@@ -57,32 +57,36 @@ int SolveIt(int car_num)
   /// Set up the board based on input.
   Board board;
   board.readInput(car_num);
+  board.printBoard();
   /// Set up queue for boards to solve.
   queue<Board> board_queue;
   /// Set up a map so that duplicate boards can be checked.
   map<string, int> board_map;
 
+  board_queue.push(board);
+  board_queue.pop();
+
   for (int i = 0; i < car_num; i++)
   {
     /// Orient the cursor.
     board.setCursor(i);
+    cout << i << endl;
     /** Attempt to move the car in both directions. If a certain move results
     in no collisions, the move is valid. If the move is valid, queue the current
     state of the board. */
     if (board.moveForward() == true)
     {
-      board_queue.push(board);
+      //board_queue.push(board);
       board.moveBackward();
     }
     if (board.moveBackward() == true)
     {
-      board_queue.push(board);
+      //board_queue.push(board);
       board.moveForward();
     }
-    board_queue.pop();
   }
 
-  //board.printBoard();
+  board.printBoard();
   return 1;
 }
 

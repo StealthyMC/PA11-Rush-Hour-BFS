@@ -37,6 +37,41 @@ public:
     cursor = NULL;
     head = NULL;
   }
+
+  Board(const Board& other)
+  {
+    head = new Vehicle(other.head->length, other.head->orient, other.head->row,
+      other.head->col, NULL);
+
+    Vehicle* p = other.head;   // set cursor pointer to head (other)
+    cursor = head;              // set cursor pointer to head (self)
+
+    gotoNext();
+    p = p->next;
+
+    if (p->next != NULL)   // as long as node points to something (other)
+    {
+      while (p->next != NULL)
+      {
+        Vehicle* prev = cursor;  // keep track of previous node in list
+        cursor = new Vehicle(other.head->length, other.head->orient, other.head->row,
+        other.head->col, NULL);
+        prev->next = cursor;      // update next pointer
+
+        gotoNext();               // move to next node (self)
+        p = p->next;
+      }
+    }
+    cursor = head;    // reset cursor
+
+    // copy the array
+    for (int i = 0; i < 6; i++)
+    {
+      for (int j = 0; j < 6; j++)
+        lot[i][j] = other.lot[i][j];
+    }
+  }
+
   /**
   * Destructor for board.
   *
@@ -49,6 +84,47 @@ public:
   ~Board()
   {
     clear();
+  }
+
+  Board& operator=(const Board& other)
+  {
+    if (this == &other)
+      return *this;
+
+    if (isEmpty() == false)   // clear the contents first if any exist
+      clear();
+
+    head = new Vehicle(other.head->length, other.head->orient, other.head->row,
+      other.head->col, NULL);
+
+    Vehicle* p = other.head;   // set cursor pointer to head (other)
+    cursor = head;              // set cursor pointer to head (self)
+
+    gotoNext();
+    p = p->next;
+
+    if (p->next != NULL)   // as long as node points to something (other)
+    {
+      while (p->next != NULL)
+      {
+        Vehicle* prev = cursor;  // keep track of previous node in list
+        cursor = new Vehicle(other.head->length, other.head->orient, other.head->row,
+        other.head->col, NULL);
+        prev->next = cursor;      // update next pointer
+
+        gotoNext();               // move to next node (self)
+        p = p->next;
+      }
+    }
+    cursor = head;    // reset cursor
+
+    // copy the array
+    for (int i = 0; i < 6; i++)
+    {
+      for (int j = 0; j < 6; j++)
+        lot[i][j] = other.lot[i][j];
+    }
+    return *this;
   }
 
   /**
@@ -207,6 +283,7 @@ public:
       count++;
     }
   }
+
   /**
   * Sets all elements of parking lot to 0, otherwise known as "empty."
   *
@@ -377,7 +454,6 @@ public:
 
   void readInput(int car_num)
   {
-    cout << "Hello" << endl;
     if (car_num > 0)
     {
       int length, row, col;
@@ -402,7 +478,7 @@ public:
    * @exception N/A
    * @note    the chars after N designate the numofmoves
    */
-  string a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
+  /*string a2d2string(int (&board)[6][6])
   {
       string s1="";
       for(int j = 0; j < MAXBOARDSIZE; j++)
@@ -416,20 +492,20 @@ public:
       return s1;
   }
 
-    void string2a2d(string input,int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
+    void string2a2d(string input,int (&board)[6][6])
     {
         int c=0;
         int ret=1000;
         int r1,r2=0;
-        for (int i=0;i<MAXBOARDSIZE;i++)
+        for (int i=0;i<6;i++)
         {
-            for (int j=0;j<MAXBOARDSIZE;j++)
+            for (int j=0;j<6;j++)
             {
                board[j][i]=input[c]-48;
                c++;
             }
         }
-    }
+    }*/
 
 
 private:
