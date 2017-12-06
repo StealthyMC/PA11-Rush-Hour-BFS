@@ -40,36 +40,13 @@ public:
 
   Board(const Board& other)
   {
-    head = new Vehicle(other.head->length, other.head->orient, other.head->row,
-      other.head->col, NULL);
-
-    Vehicle* p = other.head;   // set cursor pointer to head (other)
-    cursor = head;              // set cursor pointer to head (self)
-
-    gotoNext();
-    p = p->next;
-
-    if (p->next != NULL)   // as long as node points to something (other)
+    Vehicle* ptr = other.head;
+    while (ptr != NULL)
     {
-      while (p->next != NULL)
-      {
-        Vehicle* prev = cursor;  // keep track of previous node in list
-        cursor = new Vehicle(other.head->length, other.head->orient, other.head->row,
-        other.head->col, NULL);
-        prev->next = cursor;      // update next pointer
-
-        gotoNext();               // move to next node (self)
-        p = p->next;
-      }
+      insert(ptr->length, ptr->orient, ptr->row, ptr->col);
+      ptr = ptr->next;
     }
-    cursor = head;    // reset cursor
 
-    // copy the array
-    for (int i = 0; i < 6; i++)
-    {
-      for (int j = 0; j < 6; j++)
-        lot[i][j] = other.lot[i][j];
-    }
   }
 
   /**
@@ -94,35 +71,11 @@ public:
     if (isEmpty() == false)   // clear the contents first if any exist
       clear();
 
-    head = new Vehicle(other.head->length, other.head->orient, other.head->row,
-      other.head->col, NULL);
-
-    Vehicle* p = other.head;   // set cursor pointer to head (other)
-    cursor = head;              // set cursor pointer to head (self)
-
-    gotoNext();
-    p = p->next;
-
-    if (p->next != NULL)   // as long as node points to something (other)
+    Vehicle* ptr = other.head;
+    while (ptr != NULL)
     {
-      while (p->next != NULL)
-      {
-        Vehicle* prev = cursor;  // keep track of previous node in list
-        cursor = new Vehicle(other.head->length, other.head->orient, other.head->row,
-        other.head->col, NULL);
-        prev->next = cursor;      // update next pointer
-
-        gotoNext();               // move to next node (self)
-        p = p->next;
-      }
-    }
-    cursor = head;    // reset cursor
-
-    // copy the array
-    for (int i = 0; i < 6; i++)
-    {
-      for (int j = 0; j < 6; j++)
-        lot[i][j] = other.lot[i][j];
+      insert(ptr->length, ptr->orient, ptr->row, ptr->col);
+      ptr = ptr->next;
     }
     return *this;
   }
@@ -153,6 +106,7 @@ public:
       cursor->next = new Vehicle(length_set, orient_set, row_set, col_set, NULL);
       cursor = cursor->next;
     }
+
     /// Then, update the board with the newly inserted car.
     lot[cursor->row][cursor->col] = 1;
     for (int i = 0; i < cursor->length; i++)
@@ -458,7 +412,7 @@ public:
     {
       int length, row, col;
       char orient;
-      for (int i = car_num; i > 0; i--)
+      for (int i = 0; i < car_num; i++)
       {
         /// Create variables that will read in data, which will then be inserted.
         cin >> length;

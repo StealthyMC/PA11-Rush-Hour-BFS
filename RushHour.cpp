@@ -35,28 +35,11 @@ using namespace std;
 
 int SolveIt(int car_num)
 {
-    int move_num=0;
-  /*  ALGORITHM
-
-  - perform moves on all cars
-
-  (DO THIS FOR ALL CARS)
-  - if move returns true
-    true: insert into map and move in opposite direction
-    false: don't
-  (DO THIS FOR ALL CARS)
-
-  - have we seen this board?
-    no: enqueue
-    yes: don't
-
-
-  - run isSolved on board in queue
-
-  */
+  int move_num = 0;
 
   /// Set up the board based on input.
   Board board;
+  board.initBoard();
   board.readInput(car_num);
   /// Set up queue for boards to solve.
   queue<Board> board_queue;
@@ -92,13 +75,26 @@ int SolveIt(int car_num)
         }
       }
     }
-    Board& temp = board_queue.front();
-    temp.printBoard();
-    cout << board_queue.size() << endl;
-    board_queue.pop();
-  }
+    // At this point, the boards have been tossed into the queue.
+    // Now check all queued boards if they are solved or not.
+    Board& board_check = board_queue.front();
+    while (board_check.isSolved() == false && board_check.isEmpty() == false)
+    {
+      board_check.printBoard(); // test
 
-  //board.printBoard();
+      if (board_check.isSolved() == false)
+      {
+        board_queue.pop();
+        // Get the next board. (if it exists)
+        if (board_queue.isEmpty() == false)
+          board_check = board_queue.front();
+      }
+      else
+      {
+        move_num = board_map[board_check.a2d2string()]; // set move number
+      }
+    }
+  }
   return move_num;
 }
 
