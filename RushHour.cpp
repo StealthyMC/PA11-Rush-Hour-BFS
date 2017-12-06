@@ -37,11 +37,13 @@ int SolveIt(int car_num)
 {
   /*  ALGORITHM
 
-  - perform move
+  - perform moves on all cars
 
+  (DO THIS FOR ALL CARS)
   - if move returns true
     true: insert into map and move in opposite direction
     false: don't
+  (DO THIS FOR ALL CARS)
 
   - have we seen this board?
     no: enqueue
@@ -55,11 +57,29 @@ int SolveIt(int car_num)
   /// Set up the board based on input.
   Board board;
   board.readInput(car_num);
-
   /// Set up queue for boards to solve.
-  queue<Board> solution;
+  queue<Board> board_queue;
   /// Set up a map so that duplicate boards can be checked.
   map<string, int> board_map;
+
+  for (int i = 0; i < car_num; i++)
+  {
+    /// Orient the cursor.
+    setCursor(i);
+    /** Attempt to move the car in both directions. If a certain move results
+    in no collisions, the move is valid. If the move is valid, queue the current
+    state of the board. */
+    if (cursor->moveForward() == true)
+    {
+      board_queue.push(board);
+      cursor->moveBackward();
+    }
+    if (cursor->moveBackward() == true)
+    {
+      board_queue.push(board);
+      cursor->moveForward();
+    }
+  }
 
   board.printBoard();
   return 1;
