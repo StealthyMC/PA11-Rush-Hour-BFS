@@ -69,24 +69,42 @@ int SolveIt(int car_num)
   }
 
   */
-
+  /// Initialize variable to keep track of whether or not the board is solved.
+  bool solved = false;
   /// Add default state of board to queue and mark it.
   board_queue.push(board); // adds board to board_queue
-  while (board_queue.empty() == false)
+  Board& board_check = board_queue.front(); // fetches the board at the front
+  board_map[board_check.boardToString()] = move_num; // marks board as visited
+
+  while (board_queue.empty() == false && solved == false)
   {
-    Board& board_check = board_queue.front(); // fetches the board at the front
-    board_map[board_check.boardToString()] = move_num; // marks board as visited 
     board_queue.pop();  // pop the board from queue
 
-    while (board_map[board_check.boardToString()].count == 0)
+    int i = 0;
+    // for each unvisited vertex
+    while (board_map.count(board_check.boardToString()) == 0 && i < car_num)
     {
-      board_queue.push(board);  // add to queue
-      board_check = board_queue.front();  // fetch the board
-      board_map[board_check.boardToString()] = move_num; // marks board as visited
+      board.setCursor(i); // orient the cursor
+      if (board.moveForward() == true)
+      {
+        board_queue.push(board);  // add to queue
+        board_check = board_queue.front();  // fetch the board
+        board_map[board_check.boardToString()] = move_num; // marks board as visited
+        solved = board_check.isSolved();
+      }
+      if (board.moveBackward() == true)
+      {
+        board_queue.push(board);  // add to queue
+        board_check = board_queue.front();  // fetch the board
+        board_map[board_check.boardToString()] = move_num; // marks board as visited
+        solved = board_check.isSolved();
+      }
+      i++;
     }
   }
-
-  return move_num;
+  // return the move_num stored in the map for the current board selected
+  // from the queue
+  return board_map[board_check.boardToString()];
 }
 
 int main()
