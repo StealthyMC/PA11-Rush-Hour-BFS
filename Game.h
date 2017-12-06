@@ -478,35 +478,33 @@ public:
    * @exception N/A
    * @note    the chars after N designate the numofmoves
    */
-  /*string a2d2string(int (&board)[6][6])
+  string a2d2string()
   {
       string s1="";
       for(int j = 0; j < MAXBOARDSIZE; j++)
       {
           for(int i = 0; i < MAXBOARDSIZE; i++)
           {
-              char c = '0' + board[i][j];
+              char c = '0' + lot[i][j];
               s1.push_back(c);
           }
       }
       return s1;
   }
-
-    void string2a2d(string input,int (&board)[6][6])
-    {
-        int c=0;
-        int ret=1000;
-        int r1,r2=0;
-        for (int i=0;i<6;i++)
-        {
-            for (int j=0;j<6;j++)
-            {
-               board[j][i]=input[c]-48;
-               c++;
-            }
-        }
-    }*/
-
+  void string2a2d()
+  {
+      int c=0;
+      int ret=1000;
+      int r1,r2=0;
+      for (int i=0;i<6;i++)
+      {
+          for (int j=0;j<6;j++)
+          {
+              lot[j][i]=input[c]-48;
+              c++;
+          }
+      }
+  }
 
 private:
   class Vehicle
