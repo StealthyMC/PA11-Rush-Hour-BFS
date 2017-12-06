@@ -481,17 +481,17 @@ public:
   string a2d2string()
   {
       string s1="";
-      for(int j = 0; j < MAXBOARDSIZE; j++)
+      for(int j = 0; j < 6; j++)
       {
-          for(int i = 0; i < MAXBOARDSIZE; i++)
+          for(int i = 0; i < 6; i++)
           {
-              char c = '0' + lot[i][j];
+              char c = '0' + lot[j][i];
               s1.push_back(c);
           }
       }
       return s1;
   }
-  void string2a2d()
+  /*void string2a2d()
   {
       int c=0;
       int ret=1000;
@@ -504,7 +504,7 @@ public:
               c++;
           }
       }
-  }
+  }*/
 
 private:
   class Vehicle
