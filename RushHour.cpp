@@ -69,42 +69,53 @@ int SolveIt(int car_num)
   }
 
   */
-  /// Initialize variable to keep track of whether or not the board is solved.
-  bool solved = false;
+
   /// Add default state of board to queue and mark it.
   board_queue.push(board); // adds board to board_queue
-  Board& board_check = board_queue.front(); // fetches the board at the front
-  board_map[board_check.boardToString()] = move_num; // marks board as visited
-
+  board_map[board.boardToString()] = move_num; // marks board as visited
+  /// Initialize variable to keep track of whether or not the board is solved.
+  bool solved = board.isSolved();
+board.printBoard();
   while (board_queue.empty() == false && solved == false)
   {
-    board_queue.pop();  // pop the board from queue
+    board = board_queue.front();
+    board_queue.pop();
 
-    int i = 0;
-    // for each unvisited vertex
-    while (board_map.count(board_check.boardToString()) == 0 && i < car_num)
+    solved = board.isSolved();
+
+    if (solved == false)
     {
-      board.setCursor(i); // orient the cursor
-      if (board.moveForward() == true)
+      for (int i = 0; i < car_num; i++)
       {
-        board_queue.push(board);  // add to queue
-        board_check = board_queue.front();  // fetch the board
-        board_map[board_check.boardToString()] = move_num; // marks board as visited
-        solved = board_check.isSolved();
+        // save the current state and move number
+        Board& board_temp = board;
+        board.setCursor(i);
+        int move_num = board_map[board.boardToString()];
+
+        if (board.moveForward() == true && board_map.count(board.boardToString()) == 0)
+        {
+          board_queue.push(board);
+          move_num++;
+          board_map[board.boardToString()] = move_num;
+        }
+
+        // recover data
+        board = board_temp;
+        move_num = board_map[board.boardToString()];
+
+        if (board.moveBackward() == true && board_map.count(board.boardToString()) == 0)
+        {
+          board_queue.push(board);
+          move_num++;
+          board_map[board.boardToString()] = move_num;
+        }
       }
-      if (board.moveBackward() == true)
-      {
-        board_queue.push(board);  // add to queue
-        board_check = board_queue.front();  // fetch the board
-        board_map[board_check.boardToString()] = move_num; // marks board as visited
-        solved = board_check.isSolved();
-      }
-      i++;
     }
   }
+  board.printBoard();
   // return the move_num stored in the map for the current board selected
   // from the queue
-  return board_map[board_check.boardToString()];
+  return board_map[board.boardToString()];
 }
 
 int main()

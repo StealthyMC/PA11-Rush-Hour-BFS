@@ -70,6 +70,8 @@ public:
     if (isEmpty() == false)   // clear the contents first if any exist
       clear();
 
+    initBoard();
+
     Vehicle* ptr = other.head;
     while (ptr != NULL)
     {
