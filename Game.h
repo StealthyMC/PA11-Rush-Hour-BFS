@@ -1,4 +1,5 @@
 /**
+@author Jared Knutson, Ian Grant, Andrew McIntyre
 @details The Board class manages all of the Vehicle objects within it, which does so by
 modifying an array and moving the car around by changing their row and column
 positions. The Vehicles inside of the Board class act as a Linked List, and
@@ -54,8 +55,7 @@ public:
       while (p->next != NULL)
       {
         Vehicle* prev = cursor;  // keep track of previous node in list
-        cursor = new Vehicle(other.head->length, other.head->orient, other.head->row,
-        other.head->col, NULL);
+        cursor = new Vehicle(p->length, p->orient, p->row,p->col, NULL);
         prev->next = cursor;      // update next pointer
 
         gotoNext();               // move to next node (self)
@@ -108,8 +108,7 @@ public:
       while (p->next != NULL)
       {
         Vehicle* prev = cursor;  // keep track of previous node in list
-        cursor = new Vehicle(other.head->length, other.head->orient, other.head->row,
-        other.head->col, NULL);
+        cursor = new Vehicle(p->length, p->orient, p->row,p->col, NULL);
         prev->next = cursor;      // update next pointer
 
         gotoNext();               // move to next node (self)
@@ -117,7 +116,7 @@ public:
       }
     }
     cursor = head;    // reset cursor
-
+    cout << 5 << endl;
     // copy the array
     for (int i = 0; i < 6; i++)
     {

@@ -1,5 +1,5 @@
 /** @file RushHour.cpp
-@author Andrew McIntyre
+@author Jared Knutson,Ian Grant,Andrew McIntyre
 @version Revision 2.0
 @brief This program will solve a traffic jam. The result will be the
 solution with the smallest number of moves.
@@ -103,7 +103,9 @@ int SolveIt(int car_num)
         return board_map[board.a2d2string()];
     }
     Board& temp = board_queue.front();
+    cout << 1 << endl;
     board=temp;
+    cout << 2 << endl;
     board_queue.pop();
   }
   cout << "EMPTY" << endl;
