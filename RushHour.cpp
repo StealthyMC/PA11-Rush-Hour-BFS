@@ -77,23 +77,22 @@ int SolveIt(int car_num)
     if (board.moveForward() == true && board_map[board.a2d2string()] == false)
     {
       board_queue.push(board);
-      cout << "Queued" << endl;
-      board_map[board.a2d2string()]=move_num;
+      board_map[board.a2d2string()] = move_num;
       board.moveBackward();
     }
     if (board.moveBackward() == true && board_map[board.a2d2string()] == false)
     {
       board_queue.push(board);
-      cout << "Queued" << endl;
-      board_map[board.a2d2string()]=move_num;
+      board_map[board.a2d2string()] = move_num;
       board.moveForward();
     }
-    if (board_queue.empty() == false)
-    {
-      cout << "hello" << endl;
-      Board temp = board_queue.front();
-      board_queue.pop();
-    }
+  }
+
+  while (board_queue.empty() == false)
+  {
+    Board& temp = board_queue.front();
+    temp.printBoard();
+    board_queue.pop();
   }
 
   //board.printBoard();
