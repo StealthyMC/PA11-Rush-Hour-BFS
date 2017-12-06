@@ -47,29 +47,6 @@ int SolveIt(int car_num)
   map<string, int> board_map;
   board_queue.push(board);
 
-  /*  Psuedocode
-
-  bfs(v: vertex)
-  {
-    q = a new empty queue
-
-    // Add v to queue and mark it
-    q.enqueue(v)
-    Mark v as visited
-
-    while (!q.empty())
-    {
-      q.dequeue(w)
-      for (each unvisited vertex u adjacent to w)
-      {
-        Mark u as visited
-        q.enqueue(u)
-      }
-    }
-  }
-
-  */
-
   /// Add default state of board to queue and mark it.
   board_queue.push(board); // adds board to board_queue
   board_map[board.boardToString()] = move_num; // marks board as visited
@@ -114,8 +91,8 @@ int SolveIt(int car_num)
           board_queue.push(board);
           board_map[board.boardToString()] = move_num;
 
-          board = board_temp;
           move_num = board_map[board_temp.boardToString()];
+          board = board_temp;
         }
       }
     }

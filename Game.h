@@ -40,6 +40,7 @@ public:
 
   Board(const Board& other)
   {
+    initBoard();
     Vehicle* ptr = other.head;
     while (ptr != NULL)
     {
