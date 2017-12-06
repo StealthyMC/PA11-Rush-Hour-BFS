@@ -75,39 +75,47 @@ int SolveIt(int car_num)
   board_map[board.boardToString()] = move_num; // marks board as visited
   /// Initialize variable to keep track of whether or not the board is solved.
   bool solved = board.isSolved();
-board.printBoard();
+  board.printBoard();
+  /// While the board is not empty and not solved, perform BFS.
   while (board_queue.empty() == false && solved == false)
   {
+    /// Grab the board from the front of the queue, and then pop it.
     board = board_queue.front();
     board_queue.pop();
-
     solved = board.isSolved();
-
+    /// If the board is not solved, move through each car and try to move them.
     if (solved == false)
     {
       for (int i = 0; i < car_num; i++)
       {
-        // save the current state and move number
-        Board& board_temp = board;
-        board.setCursor(i);
-        int move_num = board_map[board.boardToString()];
-
-        if (board.moveForward() == true && board_map.count(board.boardToString()) == 0)
-        {
-          board_queue.push(board);
-          move_num++;
-          board_map[board.boardToString()] = move_num;
-        }
-
-        // recover data
-        board = board_temp;
+        /** Before moving the selected car, first save the state of the board
+        into a temporary board. Then orient the cursor. */
+        Board board_temp;
+        board_temp = board;
         move_num = board_map[board.boardToString()];
-
-        if (board.moveBackward() == true && board_map.count(board.boardToString()) == 0)
+        board.setCursor(i);
+        /** If the car can move in a given direction, and the board hasn't
+        been "visited", push the board onto the queue and insert the state of
+        the board into the map. */
+        if (board.moveForward() == true && board_map.find(board.boardToString()) == board_map.end())
         {
-          board_queue.push(board);
           move_num++;
+          board_queue.push(board);
           board_map[board.boardToString()] = move_num;
+
+          move_num = board_map[board_temp.boardToString()];
+          board = board_temp;
+        }
+        /** After a move, the board and number of moves needs to be reset so that
+        the board can then be tested with movement in the opposite direction. */
+        if (board.moveBackward() == true && board_map.find(board.boardToString()) == board_map.end())
+        {
+          move_num++;
+          board_queue.push(board);
+          board_map[board.boardToString()] = move_num;
+
+          board = board_temp;
+          move_num = board_map[board_temp.boardToString()];
         }
       }
     }

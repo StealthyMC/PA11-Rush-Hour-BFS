@@ -46,6 +46,7 @@ public:
       insert(ptr->length, ptr->orient, ptr->row, ptr->col);
       ptr = ptr->next;
     }
+    cursor = head;
   }
 
   /**
@@ -78,6 +79,7 @@ public:
       insert(ptr->length, ptr->orient, ptr->row, ptr->col);
       ptr = ptr->next;
     }
+
     return *this;
   }
 
@@ -391,7 +393,7 @@ public:
   */
   bool isSolved() const
   {
-    return (head->col == 4);
+    return (head->col == 5 - (head->length - 1));
   }
 
   // Function made for testing. Unused in final verison.
