@@ -33,7 +33,7 @@ method on the car that the cursor pointer is pointing to.
 
 using namespace std;
 
-int SolveIt(int vehicle_num)
+int SolveIt(int car_num)
 {
   /*  ALGORITHM
 
@@ -54,7 +54,6 @@ int SolveIt(int vehicle_num)
 
   /// Set up the board based on input.
   Board board;
-  board.initBoard();
   board.readInput(car_num);
 
   /// Set up queue for boards to solve.
@@ -62,7 +61,8 @@ int SolveIt(int vehicle_num)
   /// Set up a map so that duplicate boards can be checked.
   map<string, int> board_map;
 
-
+  board.printBoard();
+  return 1;
 }
 
 int main()
