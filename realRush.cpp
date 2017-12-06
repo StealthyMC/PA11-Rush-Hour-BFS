@@ -708,7 +708,7 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
             if (carList->insertBoard(carList->a2d2string(board)) == true)
             {
                 carList->GoodBoards.push(carList->a2d2string(board));
-                carList->used[carList->a2d2string(board)]=moveNum;
+                carList->used[carList->a2d2string(board)]=moveNum+1;
             }
         } 
         if (carList->isSolved() == true)
@@ -727,7 +727,7 @@ void solveIt(List * carList, int moveNum, int numVehicles, bool& solved, int (&b
             if (carList->insertBoard(carList->a2d2string(board)) == true)
             {
                 carList->GoodBoards.push(carList->a2d2string(board));
-                carList->used[carList->a2d2string(board)]=moveNum;
+                carList->used[carList->a2d2string(board)]=moveNum+1;
             }
         }
         if (carList->isSolved() == true)
