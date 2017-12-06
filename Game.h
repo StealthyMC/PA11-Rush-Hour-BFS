@@ -395,26 +395,26 @@ public:
       }
     }
   }
-    /**
-     * @param   int (&board)[MAXBOARDSIZE][MAXBOARDSIZE]
-     * @pre     2d board is not converted to a string
-     * @post    2d board is converted to a string
-     * @exception N/A
-     * @note    the chars after N designate the numofmoves
-     */
-    string a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
-    {
-        string s1="";
-        for(int j = 0; j < MAXBOARDSIZE; j++)
-        {
-            for(int i = 0; i < MAXBOARDSIZE; i++)
-            {
-                char c = '0' + board[i][j];
-                s1.push_back(c);
-            }
-        }
-        return s1;
-    }
+  /**
+   * @param   int (&board)[MAXBOARDSIZE][MAXBOARDSIZE]
+   * @pre     2d board is not converted to a string
+   * @post    2d board is converted to a string
+   * @exception N/A
+   * @note    the chars after N designate the numofmoves
+   */
+  string a2d2string(int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
+  {
+      string s1="";
+      for(int j = 0; j < MAXBOARDSIZE; j++)
+      {
+          for(int i = 0; i < MAXBOARDSIZE; i++)
+          {
+              char c = '0' + board[i][j];
+              s1.push_back(c);
+          }
+      }
+      return s1;
+  }
 
     void string2a2d(string input,int (&board)[MAXBOARDSIZE][MAXBOARDSIZE])
     {
