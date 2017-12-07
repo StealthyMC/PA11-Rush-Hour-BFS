@@ -115,9 +115,9 @@ public:
     lot[cursor->row][cursor->col] = 1;
     for (int i = 0; i < cursor->length; i++)
     {
-      if (cursor->orient == 'H')
+      if (cursor->orient == 'H' || cursor->orient == 'h')
         lot[cursor->row][cursor->col + i] = 1;
-      else if (cursor->orient == 'V')
+      else if (cursor->orient == 'V' || cursor->orient == 'v')
         lot[cursor->row + i][cursor->col] = 1;
       else
         cout << "INVALID ORIENTATION!" << endl;
