@@ -27,7 +27,6 @@ method on the car that the cursor pointer is pointing to.
 #include <map>
 #include <queue>
 #include <string>
-#include <sstream>
 
 #include "Game.h"
 
