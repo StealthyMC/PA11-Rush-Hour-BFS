@@ -40,12 +40,14 @@ public:
 
   Board(const Board& other)
   {
+    initBoard();
     Vehicle* ptr = other.head;
     while (ptr != NULL)
     {
       insert(ptr->length, ptr->orient, ptr->row, ptr->col);
       ptr = ptr->next;
     }
+    cursor = head;
   }
 
   /**
@@ -70,12 +72,15 @@ public:
     if (isEmpty() == false)   // clear the contents first if any exist
       clear();
 
+    initBoard();
+
     Vehicle* ptr = other.head;
     while (ptr != NULL)
     {
       insert(ptr->length, ptr->orient, ptr->row, ptr->col);
       ptr = ptr->next;
     }
+
     return *this;
   }
 
@@ -389,7 +394,7 @@ public:
   */
   bool isSolved() const
   {
-    return (head->col == 4);
+    return (head->col == 5 - (head->length - 1));
   }
 
   // Function made for testing. Unused in final verison.
@@ -431,7 +436,7 @@ public:
    * @exception N/A
    * @note    the chars after N designate the numofmoves
    */
-  string a2d2string()
+  string boardToString()
   {
       string s1="";
       for(int j = 0; j < 6; j++)

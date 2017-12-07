@@ -1,5 +1,5 @@
 /** @file RushHour.cpp
-@author Jared Knutson,Ian Grant,Andrew McIntyre
+@author Jared Knutson, Ian Grant, Andrew McIntyre
 @version Revision 2.0
 @brief This program will solve a traffic jam. The result will be the
 solution with the smallest number of moves.
@@ -47,76 +47,61 @@ int SolveIt(int car_num)
   map<string, int> board_map;
   board_queue.push(board);
 
-  while (board_queue.empty() == false)
+  /// Add default state of board to queue and mark it.
+  board_queue.push(board); // adds board to board_queue
+  board_map[board.boardToString()] = move_num; // marks board as visited
+  /// Initialize variable to keep track of whether or not the board is solved.
+  bool solved = board.isSolved();
+  board.printBoard();
+  /// While the board is not empty and not solved, perform BFS.
+  while (board_queue.empty() == false && solved == false)
   {
-    for (int i = 0; i < car_num; i++)
-    {
-      /// Orient the cursor.
-      board.setCursor(i);
-      /** Attempt to move the car in both directions. If a certain move results
-      in no collisions, the move is valid. If the move is valid, queue the current
-      state of the board. */
-      if (board.moveForward() == true)
-      {
-        if (board_map.count(board.a2d2string()) == 0)
-        {
-          move_num++;
-          board.printBoard();
-          board_queue.push(board);
-          board_map[board.a2d2string()] = move_num;
-          move_num--;
-          board.moveBackward();
-        }
-      }
-      if (board.moveBackward() == true)
-      {
-        if (board_map.count(board.a2d2string()) == 0)
-        {
-          move_num++;
-          board.printBoard();
-          board_queue.push(board);
-          board_map[board.a2d2string()] = move_num;
-          move_num--;
-          board.moveForward();
-        }
-      }
-    }
-<<<<<<< HEAD
-    // At this point, the boards have been tossed into the queue.
-    // Now check all queued boards if they are solved or not.
-    Board& board_check = board_queue.front();
-    while (board_check.isSolved() == false && board_check.isEmpty() == false)
-    {
-      board_check.printBoard(); // test
-
-      if (board_check.isSolved() == false)
-      {
-        board_queue.pop();
-        // Get the next board. (if it exists)
-        if (board_queue.isEmpty() == false)
-          board_check = board_queue.front();
-      }
-      else
-      {
-        move_num = board_map[board_check.a2d2string()]; // set move number
-      }
-    }
-  }
-=======
-    if (board.isSolved())
-    {
-        return board_map[board.a2d2string()];
-    }
-    Board& temp = board_queue.front();
-    cout << 1 << endl;
-    board=temp;
-    cout << 2 << endl;
+    cout << board_queue.size() << "# of GOOD BOIS" << endl;
+    /// Grab the board from the front of the queue, and then pop it.
+    board = board_queue.front();
     board_queue.pop();
+    solved = board.isSolved();
+    /// If the board is not solved, move through each car and try to move them.
+    if (solved == false)
+    {
+      for (int i = 0; i < car_num; i++)
+      {
+        /** Before moving the selected car, first save the state of the board
+        into a temporary board. Then orient the cursor. */
+        Board board_temp;
+        board_temp = board;
+        move_num = board_map[board.boardToString()];
+        board.setCursor(i);
+        /** If the car can move in a given direction, and the board hasn't
+        been "visited", push the board onto the queue and insert the state of
+        the board into the map. */
+        if (board.moveForward() == true && board_map.find(board.boardToString()) == board_map.end())
+        {
+          move_num++;
+          board_queue.push(board);
+          board_map[board.boardToString()] = move_num;
+
+          move_num = board_map[board_temp.boardToString()];
+          board = board_temp;
+        }
+        /** After a move, the board and number of moves needs to be reset so that
+        the board can then be tested with movement in the opposite direction. */
+        if (board.moveBackward() == true && board_map.find(board.boardToString()) == board_map.end())
+        {
+          move_num++;
+          board_queue.push(board);
+          board_map[board.boardToString()] = move_num;
+          move_num = board_map[board_temp.boardToString()];
+          board = board_temp;
+        }
+      }
+    }
+    cout << board_queue.size() << "# of GOOD BOIS" << endl;
   }
-  cout << "EMPTY" << endl;
-  //board.printBoard();
->>>>>>> a4e31e3c03bf77478f9f8075aeda875f868e966c
-  return move_num;
+  board.printBoard();
+  // return the move_num stored in the map for the current board selected
+  // from the queue
+  return board_map[board.boardToString()];
 }
 
 int main()
