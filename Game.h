@@ -26,9 +26,13 @@ public:
   *
   * Simply initalizes the board. Sets grid elements to 0 and sets pointers.
   *
+  * @param N/A
   * @pre   The board will not be initialized.
-  * @post  The board will be declared, and the grid be ready to have data to be
+  * @post   The board will be declared, and the grid be ready to have data to be
   *        written to it.
+  * @exception N/A
+  * @note This method constructs a default board object
+  * @return N/A
   */
   Board()
   {
@@ -410,6 +414,15 @@ public:
     cout << endl;
   }
 
+  /**
+  * Reads the input added by the user .
+  *
+  * Reads the length orient, row and col of the new car
+  * used to create new car objects on the board
+  *
+  * @pre   n/a.
+  * @post  inserts the values into a new car object
+  */
   void readInput(int car_num)
   {
     if (car_num > 0)
@@ -423,6 +436,7 @@ public:
         cin >> orient;
         cin >> row;
         cin >> col;
+        cout << length << orient << row << col << endl;
 
         /// Insert car based on stats.
         insert(length, orient, row, col);
