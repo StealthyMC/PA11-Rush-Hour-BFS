@@ -30,10 +30,10 @@ class Board
                 row = row_set;
                 col = col_set;
             }
-            moveForward(int carIndex)
-            {
+//            moveForward(int carIndex)
+ //           {
 
-            }
+  //          }
 
             int length;
             char orient;
@@ -75,6 +75,7 @@ class Board
         }
         //moveNum=other.moveNum;
         carVector = other.carVector;
+        updateBoard();
     }
     /**
      * Destructor for board.
@@ -101,6 +102,7 @@ class Board
         }       initBoard();
         //moveNum=other.moveNum;
         carVector = other.carVector;
+        updateBoard();
     }
     void readInput(int car_num)
     {
@@ -115,7 +117,7 @@ class Board
                 cin >> orient;
                 cin >> row;
                 cin >> col;
-                Vehicle tempCar(length,orient,row,col);
+                Vehicle tempCar(length,orient,++row,++col);
                 /// Insert car based on stats.
                 carVector.push_back(tempCar);
             }

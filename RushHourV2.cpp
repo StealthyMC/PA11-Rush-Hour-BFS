@@ -25,6 +25,8 @@ method on the car that the cursor pointer is pointing to.
 #include <cstdlib>
 #include <cstddef>
 #include <vector>
+#include <queue>
+#include <map>
 #include <string>
 
 #include "Traffic.h"
@@ -33,6 +35,9 @@ using namespace std;
 
 int main() {
     Board traffic;
+    Board temp;
+    queue<Board> board_queue;
+    map<string, int> board_map;
     traffic.initBoard();
     traffic.printBoard();
     /// Initiate variable to fetch the number of cars.
@@ -43,7 +48,13 @@ int main() {
     cin >> car_num;
     //while (car_num != 0)
     //{
-        traffic.readInput();
+        traffic.readInput(car_num);
+        traffic.printBoard();
+        board_queue.push(traffic);
+        temp = board_queue.front();
+        cout << "COPY TEST" << endl;
+        temp.printBoard();
+        board_queue.pop();
         /// Print final message.
         //cout << "Scenario " << scenario << " requires " << moves << " moves" << endl;
         /** Once the number of moves is posted, increment the scenario variable to
