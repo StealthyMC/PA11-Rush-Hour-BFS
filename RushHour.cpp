@@ -25,7 +25,7 @@ method on the car that the cursor pointer is pointing to.
 #include <string>
 #include <vector>
 
-//#include "Traffic.h"
+#include "Traffic.h"
 
 using namespace std;
 
@@ -42,21 +42,22 @@ int SolveIt(int car_num)
 
   while (board_queue.empty() == false && board.isSolved() == false)
   {
-    board = board_map.front();
+    board = board_queue.front();
     board_queue.pop();
 
-    if (board.isSolved() && board_map.find(board_map.boardToString()) == board_map.end())
+    if (board.isSolved() == false && board_map.find(board.boardToString()) == board_map.end())
     {
+      board_map[board.boardToString()] = move_num;
       for (int i = 0; i < car_num; i++)
       {
-        if (board.moveForward(i) == true && board_map.find(board_map.boardToString()) == board_map.end())
+        if (board.moveForward(i) == true && board_map.find(board.boardToString()) == board_map.end())
         {
           move_num++;
           board_queue.push(board);
           move_num--;
           board.moveBackward(i);
         }
-        if (board.moveBackward(i) == true && board_map.find(board_map.boardToString()) == board_map.end())
+        if (board.moveBackward(i) == true && board_map.find(board.boardToString()) == board_map.end())
         {
           move_num++;
           board_queue.push(board);

@@ -94,6 +94,9 @@ class Board
     }
     Board& operator=(const Board& other)
     {
+        if (this == &other)
+          return *this;
+
         carVector.clear();
         for (int i=0; i< 8; i++)
         {
@@ -105,6 +108,7 @@ class Board
         //moveNum=other.moveNum;
         carVector = other.carVector;
         updateBoard();
+        return *this;
     }
     /**
      * read input of board inupt
@@ -316,10 +320,9 @@ class Board
             }
 
         }
+        return false;
     }
 
     int lot[8][8];
     vector<Vehicle> carVector;
 };
-
-
