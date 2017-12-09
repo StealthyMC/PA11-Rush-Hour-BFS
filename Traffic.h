@@ -179,6 +179,38 @@ class Board
         }
         return s1;
     }
+
+    bool moveForward(int i)
+    {
+        if(carVector.at(i).orient == 'H' && lot[carVector.at(i).row][carVector.at(i).col + carVector.at(i).length] == 0 && carVector.at(i).col < 6 - carVector.at(i).length)
+        {
+            carVector.at(i).col++;
+
+            lot[carVector.at(i).row][carVector.at(i).col] = 1;
+            for (int i = 0; i < carVector.at(i).length; i++)
+            {
+                lot[carVector.at(i).row][carVector.at(i).col+i] = 1;
+                lot[carVector.at(i).row][carVector.at(i).col-1] = 0;
+            }
+            return true;
+        }
+        else
+            return false;
+        if(carVector.at(i).orient == 'V' && lot[carVector.at(i).row + carVector.at(i).length][carVector.at(i).col] == 0 && carVector.at(i).row < 6 - carVector.at(i).length)
+        {
+            carVector.at(i).row++;
+
+            lot[carVector.at(i).row][carVector.at(i).col] = 1;
+            for (int i = 0; i < carVector.at(i).length; i++)
+            {
+                lot[carVector.at(i).row+i][carVector.at(i).col] = 1;
+                lot[carVector.at(i).row-1][carVector.at(i).col] = 0;
+            }
+        }
+        else
+            return false;
+    }
+
     int lot[8][8];
     vector<Vehicle> carVector;
 };
