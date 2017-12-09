@@ -204,6 +204,30 @@ class Board
             return false;
     }
 
+    bool moveBackward(int i)
+    {
+        if(carVector.at(i).orient == 'H' && isCollision() == false)
+        {
+            carVector.at(i).col--;
+            initBoard();
+            updateBoard();
+
+            return true;
+        }
+        else
+            return false;
+
+        if(carVector.at(i).orient == 'V' && isCollision() == false)
+        {
+            carVector.at(i).row--;
+            initBoard();
+            updateBoard();
+
+        }
+        else
+            return false;
+    }
+
     int lot[8][8];
     vector<Vehicle> carVector;
 };
