@@ -182,7 +182,7 @@ class Board
 
     bool moveForward(int i)
     {
-        if(carVector.at(i).orient == 'H' && isCollision() == false)
+        if(carVector.at(i).orient == 'H' && isCollision(true) == false)
         {
             carVector.at(i).col++;
             initBoard();
@@ -193,7 +193,7 @@ class Board
         else
             return false;
 
-        if(carVector.at(i).orient == 'V' && isCollision() == false)
+        if(carVector.at(i).orient == 'V' && isCollision(true) == false)
         {
             carVector.at(i).row++;
             initBoard();
@@ -206,7 +206,7 @@ class Board
 
     bool moveBackward(int i)
     {
-        if(carVector.at(i).orient == 'H' && isCollision() == false)
+        if(carVector.at(i).orient == 'H' && isCollision(false) == false)
         {
             carVector.at(i).col--;
             initBoard();
@@ -217,7 +217,7 @@ class Board
         else
             return false;
 
-        if(carVector.at(i).orient == 'V' && isCollision() == false)
+        if(carVector.at(i).orient == 'V' && isCollision(false) == false)
         {
             carVector.at(i).row--;
             initBoard();
@@ -226,6 +226,11 @@ class Board
         }
         else
             return false;
+    }
+
+    bool isCollision(bool flag)
+    {
+
     }
 
     int lot[8][8];
