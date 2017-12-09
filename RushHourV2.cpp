@@ -55,6 +55,7 @@ int main() {
         cout << "COPY TEST" << endl;
         temp.printBoard();
         board_queue.pop();
+        cout << "SUCCESS TEST" << boolalpha << traffic.isSolved() << endl;
         /// Print final message.
         //cout << "Scenario " << scenario << " requires " << moves << " moves" << endl;
         /** Once the number of moves is posted, increment the scenario variable to
