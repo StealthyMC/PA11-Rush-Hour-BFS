@@ -30,6 +30,11 @@ class Board
                 row = row_set;
                 col = col_set;
             }
+            moveForward(int carIndex)
+            {
+
+            }
+
             int length;
             char orient;
             int row;
@@ -154,9 +159,9 @@ class Board
                 else if (it->orient == 'V' || it->orient == 'v')
                     lot[it->row][it->col] = 1;
                 else
-                    cout << "INVALID ORIENTATION!" << endl; 
+                    cout << "INVALID ORIENTATION!" << endl;
             }
-        } 
+        }
     }
     string boardToString()
     {
@@ -172,5 +177,7 @@ class Board
         return s1;
     }
     int lot[8][8];
-    vector<Vehicle> carVector; 
+    vector<Vehicle> carVector;
 };
+
+
