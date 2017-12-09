@@ -1,23 +1,4 @@
-Skip to content
-Help save net neutrality! A free, open internet is once again at stake—and we need your help.
-Learn more  Dismiss
-This repository
-Search
-Pull requests
-Issues
-Marketplace
-Explore
- @StealthyMC
- Sign out
- Watch 2
-  Star 0  Fork 1 StealthyMC/PA11-Rush-Hour-BFS
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
-Tree: 2d811c7963 Find file Copy pathPA11-Rush-Hour-BFS/RushHour.cpp
-2d811c7  a day ago
-@StealthyMC StealthyMC Lan's algorithm mostly works. The class might be broken.
-2 contributors @StealthyMC @Ian-Grant
-RawBlameHistory      
-106 lines (89 sloc)  2.76 KB
+
 /** @file RushHour.cpp
 @author Jared Knutson, Ian Grant, Andrew McIntyre
 @version Revision 2.0
@@ -46,7 +27,7 @@ method on the car that the cursor pointer is pointing to.
 #include <queue>
 #include <string>
 
-#include "Game.h"
+#include "Traffic.h"
 
 using namespace std;
 
@@ -73,30 +54,29 @@ int SolveIt(int car_num)
       return move_num;
     move_num++;
 
-    for (int i = 0; i < car_num; i++)
-    {
-      board.setCursor(i);
-      if (board.moveForward() == true)
-      {
-        if (board_map.find(board.boardToString()) == board_map.end())
+    for(int i = 0 ; i < car_num ; i++)
         {
-          board_queue.push(board);
-          board_map.insert(pair<string, int>(board.boardToString(), move_num));
-        }
-        board.moveBackward();
-      }
-      if (board.moveBackward() == true && board_map.find(board.boardToString()) == board_map.end())
-      {
-        if (board_map.find(board.boardToString()) == board_map.end())
-        {
-          board_queue.push(board);
-          board_map.insert(pair<string, int>(board.boardToString(), move_num));
-        }
-        board.moveForward();
-      }
-    }
-  }
+          if(board.moveForward(i))
+          {
+            if(board_map.find(board.boardToString()) == board_map.end())
+            {
+              board_queue.push(board);
+              board_map.insert(pair<string, int>(board.boardToString(), move_num));
+            }
+            board.moveBackward(i);
+          }
 
+          if(board.moveBackward(i))
+          {
+            if(board_map.find(board.boardToString()) == board_map.end())
+            {
+              board_queue.push(board);
+              board_map.insert(pair<string, int>(board.boardToString(), move_num));
+            }
+            board.moveForward(i);
+          }
+        }
+  }
   return move_num;
 }
 
@@ -121,15 +101,3 @@ int main()
 
   return 0;
 }
-© 2017 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-API
-Training
-Shop
-Blog
-About

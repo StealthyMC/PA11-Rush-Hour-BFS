@@ -175,7 +175,7 @@ class Board
     }
     bool isSolved()
     {
-        return carVector.at(0).col == 6 - carVector.at(0).length;
+        return (carVector.at(0).col == 6 - (carVector.at(0).length - 1));
     }
     void updateBoard()
     {
@@ -216,18 +216,15 @@ class Board
 
             return true;
         }
-        else
-            return false;
 
         if(carVector.at(i).orient == 'V' && isCollision(true, i) == false)
         {
             carVector.at(i).row++;
             initBoard();
             updateBoard();
-
+            return true;
         }
-        else
-            return false;
+        return false;
     }
 
     bool moveBackward(int i)
@@ -240,17 +237,14 @@ class Board
 
             return true;
         }
-        else
-            return false;
 
         if(carVector.at(i).orient == 'V' && isCollision(false, i) == false)
         {
             carVector.at(i).row--;
             initBoard();
             updateBoard();
-
+            return true;
         }
-        else
             return false;
     }
 
@@ -260,13 +254,13 @@ class Board
         {
             if(carVector.at(i).orient == 'V')
             {
-                if(flag)
+                if(flag)  // move forward
                 {
                     if(carVector.at(i).row+2 < 7 && lot[carVector.at(i).row+2][carVector.at(i).col] == 0)
                         return false;
                     else
                         return true;
-                }
+                } // move backward
                 else if(carVector.at(i).row-1 >= 1 && lot[carVector.at(i).row-1][carVector.at(i).col] == 0)
                     return false;
                 else
