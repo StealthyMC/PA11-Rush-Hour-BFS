@@ -115,6 +115,7 @@ class Board
                 carVector.push_back(tempCar);
             }
         }
+        updateBoard();
     }
     /**
      * Sets all elements of parking lot to 0, otherwise known as "empty."
@@ -152,7 +153,7 @@ class Board
                 if (it->orient == 'H' || it->orient == 'h')
                     lot[it->row][it->col + i] = 1;
                 else if (it->orient == 'V' || it->orient == 'v')
-                    lot[it->row][it->col] = 1;
+                    lot[it->row+i][it->col] = 1;
                 else
                     cout << "INVALID ORIENTATION!" << endl; 
             }
