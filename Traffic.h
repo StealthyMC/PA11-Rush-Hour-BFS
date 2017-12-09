@@ -295,67 +295,67 @@ class Board
     **/
     bool isCollision(bool flag, int i)
     {
-        if(carVector.at(i).length==2)
+        if(carVector.at(i).length==2) // car length 2
         {
-            if(carVector.at(i).orient == 'V')
+            if(carVector.at(i).orient == 'V') //vertical size 2
             {
                 if(flag)  // move forward
                 {
                     if(carVector.at(i).row+2 < 7 && lot[carVector.at(i).row+2][carVector.at(i).col] == 0)
-                        return false;
+                        return false; // no collision
                     else
-                        return true;
+                        return true; //collision
                 } // move backward
                 else if(carVector.at(i).row-1 >= 1 && lot[carVector.at(i).row-1][carVector.at(i).col] == 0)
-                    return false;
+                    return false; //no collision
                 else
-                    return true;
+                    return true; //collision
             }
-            if(carVector.at(i).orient == 'H')
+            if(carVector.at(i).orient == 'H') //Horizontal size 2
             {
-                if(flag)
+                if(flag) //move forward
                 {
                     if(carVector.at(i).col+2 < 7 && lot[carVector.at(i).row][carVector.at(i).col+2] == 0)
-                        return false;
+                        return false; //no collision
                     else
-                        return true;
-                }
+                        return true; //collision
+                }// move backward
                 else if(carVector.at(i).col-1 >= 1 && lot[carVector.at(i).row][carVector.at(i).col-1] == 0)
-                    return false;
+                    return false; //no collison
                 else
-                    return true;
+                    return true; //collision
             }
 
         }
-        if(carVector.at(i).length==3)
+        if(carVector.at(i).length==3) //size 3
         {
-            if(carVector.at(i).orient == 'V')
+            if(carVector.at(i).orient == 'V') //vertical size 3
             {
-                if(flag)
+                if(flag) //move forward
                 {
                     if(carVector.at(i).row+3 < 7 && lot[carVector.at(i).row+3][carVector.at(i).col] == 0)
-                        return false;
+                        return false; //no collision
                     else
-                        return true;
+                        return true; //collision
                 }
                 else if(carVector.at(i).row-1 >= 1 && lot[carVector.at(i).row-1][carVector.at(i).col] == 0)
-                    return false;
+                    return false; //no collision
                 else
-                    return true;
+                    return true; //collison
             }
-            if(carVector.at(i).orient == 'H')
+            if(carVector.at(i).orient == 'H') //Horizontal size 3
             {
-                if(flag)
+                if(flag) //move forward
                 {
                     if(carVector.at(i).col+3 < 7 && lot[carVector.at(i).row][carVector.at(i).col+3] == 0)
-                        return false;
+                        return false; //no collision
                     else
-                        return true;
+                        return true; //collision
                 }
                 else if(carVector.at(i).col-1 >= 1 && lot[carVector.at(i).row][carVector.at(i).col-1] == 0)
-                    return false;
+                    return false; //no collision
                 else
-                    return true;
+                    return true; //collision
             }
 
         }
