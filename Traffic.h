@@ -91,6 +91,12 @@ class Board
     {
         carVector.clear();
     }
+    /**
+     * Operator = Overload
+     * Overloads the operator =
+     * @pre The other is not copied over to this
+     * @post the other is copied over to this
+     */
     Board& operator=(const Board& other)
     {
         if (this == &other)
