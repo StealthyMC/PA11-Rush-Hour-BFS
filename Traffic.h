@@ -169,6 +169,10 @@ class Board
             for (int j = 1; j < 7; j++)
                 lot[i][j] = 0;
     }
+    bool isSolved()
+    {
+        return carVector.at(0).col == 6 - carVector.at(0).length;
+    }
     void updateBoard()
     {
         for (vector<Vehicle>::iterator it = carVector.begin(); it != carVector.end(); it++)
