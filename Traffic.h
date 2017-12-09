@@ -14,7 +14,7 @@ according to the best of my knowledge.
 
 #include <iostream>
 #include <stdio.h>
-#include <ctype>
+#include <ctype.h>
 #include <vector>
 using namespace std;
 
