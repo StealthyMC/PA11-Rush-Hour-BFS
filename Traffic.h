@@ -200,7 +200,7 @@ class Board
 
     bool moveForward(int i)
     {
-        if(carVector.at(i).orient == 'H' && isCollision(true) == false)
+        if(carVector.at(i).orient == 'H' && isCollision(true, i) == false)
         {
             carVector.at(i).col++;
             initBoard();
@@ -211,7 +211,7 @@ class Board
         else
             return false;
 
-        if(carVector.at(i).orient == 'V' && isCollision(true) == false)
+        if(carVector.at(i).orient == 'V' && isCollision(true, i) == false)
         {
             carVector.at(i).row++;
             initBoard();
@@ -224,7 +224,7 @@ class Board
 
     bool moveBackward(int i)
     {
-        if(carVector.at(i).orient == 'H' && isCollision(false) == false)
+        if(carVector.at(i).orient == 'H' && isCollision(false, i) == false)
         {
             carVector.at(i).col--;
             initBoard();
@@ -235,7 +235,7 @@ class Board
         else
             return false;
 
-        if(carVector.at(i).orient == 'V' && isCollision(false) == false)
+        if(carVector.at(i).orient == 'V' && isCollision(false, i) == false)
         {
             carVector.at(i).row--;
             initBoard();
@@ -246,9 +246,72 @@ class Board
             return false;
     }
 
-    bool isCollision(bool flag)
+    bool isCollision(bool flag, int i)
     {
+        if(carVector.at(i).length==2)
+        {
+            if(carVector.at(i).orient == 'V')
+            {
+                if(flag)
+                {
+                    if(carVector.at(i).row+2 < 7 && lot[carVector.at(i).row+2][carVector.at(i).col] == 0)
+                        return false;
+                    else
+                        return true;
+                }
+                else if(carVector.at(i).row-1 >= 1 && lot[carVector.at(i).row-1][carVector.at(i).col] == 0)
+                    return false;
+                else
+                    return true;
+            }
+            if(carVector.at(i).orient == 'H')
+            {
+                if(flag)
+                {
+                    if(carVector.at(i).col+2 < 7 && lot[carVector.at(i).row][carVector.at(i).col+2] == 0)
+                        return false;
+                    else
+                        return true;
+                }
+                else if(carVector.at(i).col-1 >= 1 && lot[carVector.at(i).row][carVector.at(i).col-1] == 0)
+                    return false;
+                else
+                    return true;
+            }
 
+        }
+        if(carVector.at(i).length==3)
+        {
+            if(carVector.at(i).orient == 'V')
+            {
+                if(flag)
+                {
+                    if(carVector.at(i).row+3 < 7 && lot[carVector.at(i).row+3][carVector.at(i).col] == 0)
+                        return false;
+                    else
+                        return true;
+                }
+                else if(carVector.at(i).row-1 >= 1 && lot[carVector.at(i).row-1][carVector.at(i).col] == 0)
+                    return false;
+                else
+                    return true;
+            }
+            if(carVector.at(i).orient == 'H')
+            {
+                if(flag)
+                {
+                    if(carVector.at(i).col+3 < 7 && lot[carVector.at(i).row][carVector.at(i).col+3] == 0)
+                        return false;
+                    else
+                        return true;
+                }
+                else if(carVector.at(i).col-1 >= 1 && lot[carVector.at(i).row][carVector.at(i).col-1] == 0)
+                    return false;
+                else
+                    return true;
+            }
+
+        }
     }
 
     int lot[8][8];
