@@ -231,7 +231,6 @@ class Board
         }
         return s1;
     }
-
     /**
      * @param   int i
      * @pre     Called by the RushHour.cpp
