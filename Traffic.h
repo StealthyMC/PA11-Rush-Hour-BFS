@@ -13,6 +13,8 @@ according to the best of my knowledge.
 */
 
 #include <iostream>
+#include <stdio.h>
+#include <ctype>
 #include <vector>
 using namespace std;
 
@@ -117,6 +119,7 @@ class Board
                 cin >> orient;
                 cin >> row;
                 cin >> col;
+                orient=toupper(orient);
                 Vehicle tempCar(length,orient,++row,++col);
                 /// Insert car based on stats.
                 carVector.push_back(tempCar);
@@ -157,9 +160,9 @@ class Board
         {
             for (int i = 0; i < it-> length; i++)
             {
-                if (it->orient == 'H' || it->orient == 'h')
+                if (it->orient == 'H')
                     lot[it->row][it->col + i] = 1;
-                else if (it->orient == 'V' || it->orient == 'v')
+                else if (it->orient == 'V')
                     lot[it->row+i][it->col] = 1;
                 else
                     cout << "INVALID ORIENTATION!" << endl;
