@@ -173,10 +173,25 @@ class Board
             for (int j = 1; j < 7; j++)
                 lot[i][j] = 0;
     }
+    /**
+     * isSolved
+     * Checks if the board is solved or not 
+     *
+     * @pre the board is not checked if it is a solution
+     * @post checked if the board is a solution to the puzzle
+     * @return bool if the board is a solution
+     */
     bool isSolved()
     {
         return (carVector.at(0).col == 6 - (carVector.at(0).length - 1));
     }
+    /**
+     * Update Board
+     * Updates the board with new row and col positions from the car vector
+     * @pre the board hasn't been updated with new locations
+     * @post the board has been updated with new locations
+     * @return void
+     */
     void updateBoard()
     {
         for (vector<Vehicle>::iterator it = carVector.begin(); it != carVector.end(); it++)
@@ -192,6 +207,12 @@ class Board
             }
         }
     }
+    /**
+     * Board to string
+     * Board to string convertor
+     * @pre the board has not been translated
+     * @post the board has been translated
+     */
     string boardToString()
     {
         string s1="";
