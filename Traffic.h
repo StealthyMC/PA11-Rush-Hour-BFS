@@ -106,6 +106,13 @@ class Board
         carVector = other.carVector;
         updateBoard();
     }
+    /**
+     * read input of board inupt
+     * Reads in the board input given by the user
+     *
+     * @pre board not read into array
+     * @post All of the input is read into the array
+     */
     void readInput(int car_num)
     {
         if (car_num > 0)
@@ -128,6 +135,7 @@ class Board
         updateBoard();
     }
     /**
+     * Print Board
      * Sets all elements of parking lot to 0, otherwise known as "empty."
      *
      * @pre   Lot will have cars occupying spaces.
@@ -144,6 +152,13 @@ class Board
             cout << endl;
         }
     }
+    /**
+     * init board
+     * Initializes the board to all 9s to make the boarder then all 0s for real board
+     *
+     * @pre board not initalized
+     * @post board initalized
+     */
     void initBoard()
     {
         /// Set entire board to all zeros
