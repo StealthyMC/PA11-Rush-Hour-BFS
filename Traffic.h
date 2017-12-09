@@ -29,8 +29,6 @@ class Board
                 orient = orient_set;
                 row = row_set;
                 col = col_set;
-                if (parent.lot[0][0]==9)
-                    cout << "HI" << endl;
             }
             int length;
             char orient;
