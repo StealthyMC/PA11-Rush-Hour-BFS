@@ -1,4 +1,3 @@
-
 /** @file RushHour.cpp
 @author Jared Knutson, Ian Grant, Andrew McIntyre
 @version Revision 2.0
@@ -21,11 +20,10 @@ method on the car that the cursor pointer is pointing to.
 */
 
 #include <iostream>
-#include <cstdlib>
-#include <cstddef>
 #include <map>
 #include <queue>
 #include <string>
+#include <vector>
 
 #include "Traffic.h"
 
@@ -33,51 +31,51 @@ using namespace std;
 
 int SolveIt(int car_num)
 {
+  Board board;
+  board.readInput(car_num);
+  map<string, int> board_map;
+  queue<Board> board_queue;
+
   int move_num = 0;
 
-  Board board;
-  queue<Board> board_queue;
-  map<string, int> board_map;
-  board.readInput(car_num);
-
   board_queue.push(board);
-  board_map.insert(pair<string, int>(board.boardToString(), 0));
-
-  while (board_queue.empty() == false)
+  board_map[board.boardToString()] = move_num;
+  board.printBoard();
+  cout << endl;
+  while (board_queue.empty() == false && board.isSolved() == false)
   {
     board = board_queue.front();
     board_queue.pop();
-
-    move_num = (*board_map.find(board.boardToString())).second;
-
-    if (board.isSolved() == true)
-      return move_num;
-    move_num++;
-
-    for(int i = 0 ; i < car_num ; i++)
+    if (board.isSolved() == false)
+    {
+      for (int i = 0; i < car_num; i++)
+      {
+        move_num = board_map[board.boardToString()];
+        board.moveForward(i);
+        if (board_map.find(board.boardToString()) == board_map.end())
         {
-          if(board.moveForward(i))
-          {
-            if(board_map.find(board.boardToString()) == board_map.end())
-            {
-              board_queue.push(board);
-              board_map.insert(pair<string, int>(board.boardToString(), move_num));
-            }
-            board.moveBackward(i);
-          }
-
-          if(board.moveBackward(i))
-          {
-            if(board_map.find(board.boardToString()) == board_map.end())
-            {
-              board_queue.push(board);
-              board_map.insert(pair<string, int>(board.boardToString(), move_num));
-            }
-            board.moveForward(i);
-          }
+          move_num++;
+          board_queue.push(board);
+          board_map[board.boardToString()] = move_num;
+          move_num--;
+          board.moveBackward(i);
         }
+        board.moveBackward(i);
+        if (board_map.find(board.boardToString()) == board_map.end())
+        {
+          move_num++;
+          board_queue.push(board);
+          board_map[board.boardToString()] = move_num;
+          move_num--;
+          board.moveForward(i);
+        }
+      }
+    }
+    if (board_queue.empty())
+      cout << "queue is empty" << endl;
   }
-  return move_num;
+  board.printBoard();
+  return board_map[board.boardToString()];
 }
 
 int main()
