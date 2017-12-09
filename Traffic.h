@@ -25,8 +25,7 @@ class Board
     class Vehicle
     {
         public:
-            Vehicle(int length_set, char orient_set, int row_set, int col_set)
-            {
+            Vehicle(int length_set, char orient_set, int row_set, int col_set) {
                 length = length_set;
                 orient = orient_set;
                 row = row_set;
@@ -173,10 +172,12 @@ class Board
             for (int j = 1; j < 7; j++)
                 lot[i][j] = 0;
     }
+
     bool isSolved()
     {
         return (carVector.at(0).col == 6 - (carVector.at(0).length - 1));
     }
+
     void updateBoard()
     {
         for (vector<Vehicle>::iterator it = carVector.begin(); it != carVector.end(); it++)
@@ -206,6 +207,12 @@ class Board
         return s1;
     }
 
+    /**
+     * @param   int i
+     * @pre     Called by the RushHour.cpp
+     * @post    Returns a bool
+     * @note    Checks if there is a collision then moves the car forward
+    **/
     bool moveForward(int i)
     {
         if(carVector.at(i).orient == 'H' && isCollision(true, i) == false)
@@ -227,6 +234,12 @@ class Board
         return false;
     }
 
+    /**
+     * @param   int i
+     * @pre     Called by
+     * @post    Returns a bool
+     * @note    Checks if there is a collision then moves the car back
+    **/
     bool moveBackward(int i)
     {
         if(carVector.at(i).orient == 'H' && isCollision(false, i) == false)
@@ -248,6 +261,13 @@ class Board
             return false;
     }
 
+    /**
+     * @param   bool flag
+     * @param   int i
+     * @pre     Callled by the move methods
+     * @post    Returns a bool
+     * @note    Checks if there is a collision
+    **/
     bool isCollision(bool flag, int i)
     {
         if(carVector.at(i).length==2)
