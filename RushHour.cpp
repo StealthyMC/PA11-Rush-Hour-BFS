@@ -20,13 +20,13 @@ whenever a function such as <em>moveForward(i)</em> is called, it will perform t
 method on the car i is set to.
 */
 
-#include <iostream>
-#include <cstdlib>
-#include <cstddef>
+
 #include <map>
 #include <queue>
 #include <string>
-
+#include <iostream>
+#include <cstdlib>
+#include <cstddef>
 #include "Traffic.h"
 
 using namespace std;
